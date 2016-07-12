@@ -9,6 +9,7 @@ public class BusinessLogic {
 	
 	public List<ActionNode> GetAllAction(){
 		XmlAnalyse analyseAction = new XmlAnalyse();
+		List<ActionNode> actionNodes = analyseAction.GetAction();
 		
 		return analyseAction.GetAction();
 	}

@@ -3,7 +3,7 @@ package Node;
 import Explain.Action;
 import Explain.Type;
 
-public class DragNode extends ActionNode{
+public class DragNode {
 	
 	/*
 	 * 起始点
@@ -19,7 +19,7 @@ public class DragNode extends ActionNode{
 	public double SecY;
 	
 	public DragNode(Type typ,Action act,double fstx, double fsty, double secx, double secy,double startX,double startY,ActionNode nextnode) {
-		super(typ, act, nextnode);
+//		super(typ, act, nextnode);
 		// TODO Auto-generated constructor stub
 		this.StartX = startX;
 		this.StartY = startY;
