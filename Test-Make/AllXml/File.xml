@@ -1,0 +1,16 @@
+<text>
+	<path id = "p1">
+		<edge id = "e1">
+			<start></start>
+			<end></end>
+			<eara type = "CLICK">
+				<id>one button</id>
+			
+			</eara>
+		</edge>
+	</path>
+	<path id = "p2">
+	</path>
+	<path id = "p3">
+	</path>
+</text>
