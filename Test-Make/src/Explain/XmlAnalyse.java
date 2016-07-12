@@ -12,6 +12,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import Node.ActionNode;
+import Node.DragNode;
+
 public class XmlAnalyse {
 	/*
 	 * 操作列表
@@ -21,6 +24,9 @@ public class XmlAnalyse {
 	public List<ActionNode> GetAction() {
 		// 创建一个documentBuildFactory的对象
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		
+		DragNode dragNode = new DragNode(Type.pointToArea, Action.DRAG, 0, 0, 0, 0, 0, 0, null);
+		AllPath.add(dragNode);
 		
 		try {
 			// 创建documentBuilder对象
