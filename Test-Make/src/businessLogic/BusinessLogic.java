@@ -1,14 +1,16 @@
 package businessLogic;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import Explain.ActionNode;
+import Explain.XmlAnalyse;
 
 public class BusinessLogic {
 	
-	public LinkedList<ActionNode> GetAllAction(){
+	public List<ActionNode> GetAllAction(){
+		XmlAnalyse analyseAction = new XmlAnalyse();
 		
-		return null;
+		return analyseAction.GetAction();
 	}
 	
 	

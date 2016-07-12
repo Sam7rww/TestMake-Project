@@ -1,7 +1,10 @@
 package Explain;
 
-
 public class ActionNode {
+	/*
+	 * 下一个节点
+	 */
+	private ActionNode Next;
 	/*
 	 * 用户要求操作
 	 */
@@ -17,8 +20,12 @@ public class ActionNode {
 	private double FstY;
 	private double SecX;
 	private double SecY;
+	/*
+	 * Oracle
+	 */
+	private String Oracle;
 	
-	public ActionNode(Action act,String ID,double fstx,double fsty,double secx,double secy) {
+	public ActionNode(Action act,String ID,double fstx,double fsty,double secx,double secy,ActionNode nextnode,String Ora) {
 		// TODO Auto-generated constructor stub
 		this.action = act;
 		this.id = ID;
@@ -26,6 +33,24 @@ public class ActionNode {
 		this.FstY = fsty;
 		this.SecX = secx;
 		this.SecY = secy;
+		this.Next = nextnode;
+		this.Oracle = Ora;
+	}
+
+	public ActionNode getNext() {
+		return Next;
+	}
+
+	public void setNext(ActionNode next) {
+		Next = next;
+	}
+
+	public String getOracle() {
+		return Oracle;
+	}
+
+	public void setOracle(String oracle) {
+		Oracle = oracle;
 	}
 
 	public Action getAction() {

@@ -18,4 +18,19 @@ public enum Action {
 		}
 		return null;
 	}
+    
+    public static Action ToString(String act){
+    	switch (act) {
+		case "drag":
+			return Action.DRAG;
+		case "click":
+			return Action.CLICK;
+		case "dclick":
+			return Action.DCLICK;
+		case "lclick":
+			return Action.LCLICK;
+		default:
+			return null;
+		}
+    }
 }
