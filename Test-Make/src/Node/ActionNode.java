@@ -19,11 +19,11 @@ public class ActionNode {
 	/*
 	 * 被操作的id(被操作的组件ID)，看type类型，若是component调用这个String
 	 */
-	String Componentid;
+	public String Componentid;
 	/*
 	 * 被操作的坐标(被操作的组件坐标)，看type类型，若是singlePoint调用这个String
 	 */
-	String position;
+	public String position;
 //	private double StartX;
 //	private double StartY;
 	/*
