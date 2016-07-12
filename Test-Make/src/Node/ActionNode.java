@@ -7,11 +7,11 @@ public class ActionNode {
 	/*
 	 * 下一个节点
 	 */
-	public ActionNode Next;
+	private ActionNode Next;
 	/*
 	 * 用户要求操作(click,dclick,lclick,drag)
 	 */
-	public Action action;
+	private Action action;
 	/*
 	 * 操作类型
 	 */
@@ -19,11 +19,11 @@ public class ActionNode {
 	/*
 	 * 被操作的id(被操作的组件ID)，看type类型，若是component调用这个String
 	 */
-	public String Componentid;
+	private String Componentid;
 	/*
 	 * 被操作的坐标(被操作的组件坐标)，看type类型，若是singlePoint调用这个String
 	 */
-	public String position;
+	private String position;
 //	private double StartX;
 //	private double StartY;
 	/*
@@ -46,6 +46,38 @@ public class ActionNode {
 //		this.SecX = secx;
 //		this.SecY = secy;
 //		this.Oracle = Ora;
+	}
+
+	public ActionNode getNext() {
+		return Next;
+	}
+
+	public void setNext(ActionNode next) {
+		Next = next;
+	}
+
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
+	public String getComponentid() {
+		return Componentid;
+	}
+
+	public void setComponentid(String componentid) {
+		Componentid = componentid;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	

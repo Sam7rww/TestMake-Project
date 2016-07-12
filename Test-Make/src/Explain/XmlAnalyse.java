@@ -48,11 +48,12 @@ public class XmlAnalyse {
 				NodeList OperationList = path.getChildNodes();
 				//通过NodeList的getLength方法可以获取bookList的长度
 				System.out.println("当前一共有"+OperationList.getLength()+"个操作");
+				int ope = 0;
 				for(int j=0;j<OperationList.getLength();j++){
 					//区分出text类型的node以及element类型的node 节点
 					if (OperationList.item(j).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE){
-						int ope = 0;
 						System.out.println("================下面开始遍历第"+(ope+1)+"个操作的内容================");
+						ope++;
 						//解析operation节点
 						Element operation = (Element) OperationList.item(j);
 						//通过type，Action取得属性
