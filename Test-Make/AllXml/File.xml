@@ -76,9 +76,13 @@
 		<!-- <operation type="components" action="click"> <resourceIdList> <resourceId>button2</resourceId> 
 			<resourceId>button3</resourceId> </resourceIdList> </operation> -->
 
-		<oracle type="component" action="target">
-			<resourceId>scoreTextView</resourceId>
-			<expectText>8900</expectText>
-		</oracle>
+		<oracle type = "impl.oracle_result.SingleComponentResult">
+            <singleComponent>
+                <index>3</index>
+                <resultType>TEXT</resultType>
+                <componentType>EditText</componentType>
+                <expect>14528</expect>
+            </singleComponent>
+        </oracle>
 	</path>
 </text>

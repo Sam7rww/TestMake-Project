@@ -22,6 +22,7 @@ public class ActionNode {
 	private String Componentid;
 	/*
 	 * 被操作的坐标(被操作的组件坐标)，看type类型，若是singlePoint调用这个String
+	 * Oracle(expect的值 )
 	 */
 	private String position;
 //	private double StartX;
@@ -34,7 +35,7 @@ public class ActionNode {
 //	private double SecX;
 //	private double SecY;
 	
-	public ActionNode(String typ,Action act,ActionNode nextnode,String ID,String pos) {
+	public ActionNode(ActionNode nextnode,Action act,String typ,String ID,String pos) {
 		// TODO Auto-generated constructor stub
 		this.type = typ;
 		this.action = act;
