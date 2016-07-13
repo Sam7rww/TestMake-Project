@@ -13,9 +13,9 @@ public class ActionNode {
 	 */
 	private Action action;
 	/*
-	 * 操作类型
+	 * 组件类型
 	 */
-//	public Type type
+	private String type;
 	/*
 	 * 被操作的id(被操作的组件ID)，看type类型，若是component调用这个String
 	 */
@@ -34,9 +34,9 @@ public class ActionNode {
 //	private double SecX;
 //	private double SecY;
 	
-	public ActionNode(Type typ,Action act,ActionNode nextnode,String ID,String pos) {
+	public ActionNode(String typ,Action act,ActionNode nextnode,String ID,String pos) {
 		// TODO Auto-generated constructor stub
-//		this.type = typ;
+		this.type = typ;
 		this.action = act;
 		this.Next = nextnode;
 		this.Componentid = ID;
@@ -46,6 +46,14 @@ public class ActionNode {
 //		this.SecX = secx;
 //		this.SecY = secy;
 //		this.Oracle = Ora;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public ActionNode getNext() {

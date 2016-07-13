@@ -4,13 +4,12 @@
 		<operation type="singlePoint" action="click" delayTime="5">
 			<singlePoint>
 				<pointX>400.00</pointX>
-				<pointY>400.00</pointY>
+				<pointY>450.00</pointY>
 			</singlePoint>
 		</operation>
 		<operation type="component" action="click" delayTime="5">
-			<resourceId>
-				button1
-			</resourceId>
+			<type>Button</type>
+			<resourceId>button1</resourceId>
 		</operation>
 
 		<operation type="singlePoint" action="longClick" delayTime="8">
@@ -19,12 +18,9 @@
 				<pointY>400.00</pointY>
 			</singlePoint>
 		</operation>
-	<!-- 	<operation type="components" action="longClick" delayTime="8">
-			<resourceIdList>
-				<resourceId>button2</resourceId>
-				<resourceId>button3</resourceId>
-			</resourceIdList>
-		</operation> -->
+		<!-- <operation type="components" action="longClick" delayTime="8"> <resourceIdList> 
+			<resourceId>button2</resourceId> <resourceId>button3</resourceId> </resourceIdList> 
+			</operation> -->
 
 		<operation type="doublePoint" action="drag" delayTime="8">
 			<doublePoint>
@@ -77,16 +73,12 @@
 			</area>
 		</operation>
 
-<!-- 		<operation type="components" action="click">
-			<resourceIdList>
-				<resourceId>button2</resourceId>
-				<resourceId>button3</resourceId>
-			</resourceIdList>
-		</operation> -->
+		<!-- <operation type="components" action="click"> <resourceIdList> <resourceId>button2</resourceId> 
+			<resourceId>button3</resourceId> </resourceIdList> </operation> -->
 
-		<operation type="component" action="target">
+		<oracle type="component" action="target">
 			<resourceId>scoreTextView</resourceId>
 			<expectText>8900</expectText>
-		</operation>
+		</oracle>
 	</path>
 </text>
