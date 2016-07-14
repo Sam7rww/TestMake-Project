@@ -39,50 +39,44 @@
 				<pointX>120.00</pointX>
 				<pointY>150.00</pointY>
 			</singlePoint>
-			<area>
-				<all>
-					<doublePoint>
-						<singlePoint>
-							<pointX>120.00</pointX>
-							<pointY>160.00</pointY>
-						</singlePoint>
-						<singlePoint>
-							<pointX>130.00</pointX>
-							<pointY>170.00</pointY>
-						</singlePoint>
-					</doublePoint>
-				</all>
-			</area>
+			<doublePoint>
+				<singlePoint>
+					<pointX>120.00</pointX>
+					<pointY>160.00</pointY>
+				</singlePoint>
+				<singlePoint>
+					<pointX>130.00</pointX>
+					<pointY>170.00</pointY>
+				</singlePoint>
+			</doublePoint>
 		</operation>
 		<operation type="pointToArea" action="drag" delayTime="5">
 			<singlePoint>
 				<pointX>120.00</pointX>
 				<pointY>150.00</pointY>
 			</singlePoint>
-			<area>
-				<doublePoint>
-					<singlePoint>
-						<pointX>120.00</pointX>
-						<pointY>160.00</pointY>
-					</singlePoint>
-					<singlePoint>
-						<pointX>130.00</pointX>
-						<pointY>170.00</pointY>
-					</singlePoint>
-				</doublePoint>
-			</area>
+			<doublePoint>
+				<singlePoint>
+					<pointX>120.00</pointX>
+					<pointY>160.00</pointY>
+				</singlePoint>
+				<singlePoint>
+					<pointX>130.00</pointX>
+					<pointY>170.00</pointY>
+				</singlePoint>
+			</doublePoint>
 		</operation>
 
 		<!-- <operation type="components" action="click"> <resourceIdList> <resourceId>button2</resourceId> 
 			<resourceId>button3</resourceId> </resourceIdList> </operation> -->
 
-		<oracle type = "impl.oracle_result.SingleComponentResult">
-            <singleComponent>
-                <index>3</index>
-                <resultType>TEXT</resultType>
-                <componentType>EditText</componentType>
-                <expect>14528</expect>
-            </singleComponent>
-        </oracle>
+		<oracle type="impl.oracle_result.SingleComponentResult">
+			<singleComponent>
+				<index>3</index>
+				<resultType>TEXT</resultType>
+				<componentType>EditText</componentType>
+				<expect>14528</expect>
+			</singleComponent>
+		</oracle>
 	</path>
 </text>
