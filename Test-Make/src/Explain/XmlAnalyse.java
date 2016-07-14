@@ -44,10 +44,10 @@ public class XmlAnalyse {
 			// 获取所有book节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
-			System.out.println("一共有" + pathlist.getLength() + "条路");
+//			System.out.println("一共有" + pathlist.getLength() + "条路");
 
 			for (int i = 0; i < pathlist.getLength(); i++) {
-				System.out.println("=====================下面开始遍历第" + (i + 1) + "条路的内容=====================");
+//				System.out.println("=====================下面开始遍历第" + (i + 1) + "条路的内容=====================");
 				// 通过Item(index)方法获取一个operation节点，nodelist的索引值从0开始
 				// 将book节点进行强制类型转换，转换为Element类型
 				Element path = (Element) pathlist.item(i); // 第i条路
@@ -55,12 +55,12 @@ public class XmlAnalyse {
 				// 解析path节点(即当前路)的子节点
 				NodeList OperationList = path.getChildNodes();
 				// 通过NodeList的getLength方法可以获取bookList的长度
-				System.out.println("当前一共有" + OperationList.getLength() + "个操作");
+//				System.out.println("当前一共有" + OperationList.getLength() + "个操作");
 				int ope = 0;
 				for (int j = 0; j < OperationList.getLength(); j++) {
 					// 区分出text类型的node以及element类型的node 节点
 					if (OperationList.item(j).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-						System.out.println("================下面开始遍历第" + (ope + 1) + "个操作的内容================");
+//						System.out.println("================下面开始遍历第" + (ope + 1) + "个操作的内容================");
 						ope++;
 						// 解析operation节点
 						Element operation = (Element) OperationList.item(j);
@@ -69,42 +69,42 @@ public class XmlAnalyse {
 						// 通过type，Action取得属性
 						String type = operation.getAttribute("type");
 						String action = operation.getAttribute("action");
-						System.out.println(Opename);
-						System.out.println("第" + (ope) + "个操作的类型为：" + type);
-						System.out.println("第" + ope + "个操作的动作为：" + action);
+//						System.out.println(Opename);
+//						System.out.println("第" + (ope) + "个操作的类型为：" + type);
+//						System.out.println("第" + ope + "个操作的动作为：" + action);
 
 						NodeList childNodes = operation.getChildNodes();
-						System.out.println("一共有" + childNodes.getLength() + "个子节点");
+//						System.out.println("一共有" + childNodes.getLength() + "个子节点");
 
 						if (Opename.equalsIgnoreCase("oracle")) {
-							System.out.println("这是一个Oracle哦！！");
+//							System.out.println("这是一个Oracle哦！！");
 							if (type.contains("SingleComponentResult")) {
 								String theType = null;
 								String theComponent = null;
 								String thePos = null;
 								for(int l=0;l<childNodes.getLength();l++){
 									if (childNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {
-										System.out.println(childNodes.item(l).getNodeName());
+//										System.out.println(childNodes.item(l).getNodeName());
 										NodeList singleElement = childNodes.item(l).getChildNodes();
 										for(int m=0;m<singleElement.getLength();m++){
 											if (singleElement.item(m).getNodeType() == Node.ELEMENT_NODE) {
 												String NowString = singleElement.item(m).getNodeName();
-												System.out.println("现在的子节点名字：" + NowString);
+//												System.out.println("现在的子节点名字：" + NowString);
 												if (NowString.equalsIgnoreCase("index")) {
 													theType = singleElement.item(m).getTextContent();
-													System.out.println(theType);
+//													System.out.println(theType);
 												}
 												else if (NowString.equalsIgnoreCase("resultType")) {
 													theType += "|"+singleElement.item(m).getTextContent();
-													System.out.println(theType);
+//													System.out.println(theType);
 												}
 												else if (NowString.equalsIgnoreCase("componentType")) {
 													theComponent = singleElement.item(m).getTextContent();
-													System.out.println(theComponent);
+//													System.out.println(theComponent);
 												}
 												else if (NowString.equalsIgnoreCase("expect")) {
 													thePos = singleElement.item(m).getTextContent();
-													System.out.println(thePos);
+//													System.out.println(thePos);
 												}
 											}
 										}
@@ -130,11 +130,11 @@ public class XmlAnalyse {
 										// System.out.println("操作的组件的text内容："+childNodes.item(k).getTextContent());
 										if (childNodes.item(k).getNodeName().equalsIgnoreCase("type")) {
 											type2 = childNodes.item(k).getTextContent();
-											System.out.println(type2);
+//											System.out.println(type2);
 										}
 										if (childNodes.item(k).getNodeName().equalsIgnoreCase("resourceId")) {
 											Text = childNodes.item(k).getTextContent();
-											System.out.println(Text);
+//											System.out.println(Text);
 										}
 									}
 								}
@@ -151,12 +151,12 @@ public class XmlAnalyse {
 								String position = null;
 								for (int k = 0; k < childNodes.getLength(); k++) {
 									if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-										System.out.println(childNodes.item(k).getNodeName());
+//										System.out.println(childNodes.item(k).getNodeName());
 										NodeList singleNodes = childNodes.item(k).getChildNodes();
 										for (int l = 0; l < singleNodes.getLength(); l++) {
 											if (singleNodes.item(l).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
 												String pos = singleNodes.item(l).getTextContent();
-												System.out.println("点坐标为：" + pos);
+//												System.out.println("点坐标为：" + pos);
 												if (position == null) {
 													position = pos;
 													position += "|";
@@ -165,7 +165,7 @@ public class XmlAnalyse {
 												}
 											}
 										}
-										System.out.println(position);
+//										System.out.println(position);
 									}
 								}
 								ActionNode anActionNode = null;
@@ -180,18 +180,18 @@ public class XmlAnalyse {
 								String position = null;
 								for (int k = 0; k < childNodes.getLength(); k++) {
 									if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {// doubleNode节点
-										System.out.println(childNodes.item(k).getNodeName());
+//										System.out.println(childNodes.item(k).getNodeName());
 										NodeList doubleNodes = childNodes.item(k).getChildNodes();
 										for (int l = 0; l < doubleNodes.getLength(); l++) {
 											// boolean IfFirstNode = true;
 											if (doubleNodes.item(l).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {// singleNode节点
-												System.out.println(doubleNodes.item(l).getNodeName());
+//												System.out.println(doubleNodes.item(l).getNodeName());
 												NodeList singleNodes = doubleNodes.item(l).getChildNodes();
 												String tempPosition = null;
 												for (int m = 0; m < singleNodes.getLength(); m++) {
 													if (singleNodes.item(m).getNodeType() == Node.ELEMENT_NODE) {// pointX/Y节点
 														String pos = singleNodes.item(m).getTextContent();
-														System.out.println("点坐标为：" + pos);
+//														System.out.println("点坐标为：" + pos);
 														if (tempPosition == null) {
 															tempPosition = pos;
 															tempPosition += "|";
@@ -213,7 +213,7 @@ public class XmlAnalyse {
 										}
 									}
 								}
-								System.out.println("doublePoint的结果为：" + position);
+//								System.out.println("doublePoint的结果为：" + position);
 								ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position);
 								this.setNode(anActionNode);
 							} else if (type.equalsIgnoreCase("pointToArea")) {
@@ -223,15 +223,15 @@ public class XmlAnalyse {
 								for (int k = 0; k < childNodes.getLength(); k++) {
 									if (childNodes.item(k).getNodeType() == Node.ELEMENT_NODE) {// singlePoint和doublePoint子节点
 										String ChildNodeName = childNodes.item(k).getNodeName();
-										System.out.println("当前子节点名字为（第一层子节点）：" + ChildNodeName);
+//										System.out.println("当前子节点名字为（第一层子节点）：" + ChildNodeName);
 
 										if (ChildNodeName.equalsIgnoreCase("singlePoint")) {// singlePoint子节点
-											System.out.println("----当前处理拖动的singlePoint----");
+//											System.out.println("----当前处理拖动的singlePoint----");
 											NodeList singleNode = childNodes.item(k).getChildNodes();
 											for (int l = 0; l < singleNode.getLength(); l++) {
 												if (singleNode.item(l).getNodeType() == Node.ELEMENT_NODE) {
 													String pos = singleNode.item(l).getTextContent();
-													System.out.println("点坐标为：" + pos);
+//													System.out.println("点坐标为：" + pos);
 													if (position1 == null) {
 														position1 = pos;
 														position1 += "|";
@@ -240,22 +240,22 @@ public class XmlAnalyse {
 													}
 												}
 											}
-											System.out.println("SinglePoint的值为：" + position1);
+//											System.out.println("SinglePoint的值为：" + position1);
 										} else { // doublePoint子节点
-											System.out.println("----当前处理拖动的area----");
+//											System.out.println("----当前处理拖动的area----");
 											NodeList singleNodes = childNodes.item(k).getChildNodes();
 											for (int l = 0; l < singleNodes.getLength(); l++) { // 遍历doublePoint子节点
 												if (singleNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {// doublePoint子节点中的element(singlePoint)
-													System.out.println(
-															"area中的第一层子节点" + singleNodes.item(l).getNodeName());
+//													System.out.println(
+//															"area中的第一层子节点" + singleNodes.item(l).getNodeName());
 													NodeList pointNodes = singleNodes.item(l).getChildNodes();
 													String tempPosition = null;
 													for (int m = 0; m < pointNodes.getLength(); m++) {
 														if (pointNodes.item(m).getNodeType() == Node.ELEMENT_NODE) {// pointX/Y节点
-															System.out.println(
-																	"area中的第二层子节点" + pointNodes.item(m).getNodeName());
+//															System.out.println(
+//																	"area中的第二层子节点" + pointNodes.item(m).getNodeName());
 															String pos = pointNodes.item(m).getTextContent();
-															System.out.println("点坐标为：" + pos);
+//															System.out.println("点坐标为：" + pos);
 															if (tempPosition == null) {
 																tempPosition = pos;
 																tempPosition += "|";
@@ -279,7 +279,7 @@ public class XmlAnalyse {
 									}
 								}
 								position1 = position1 + "#" + position2;
-								System.out.println("拖动操作的最后坐标为：" + position1);
+//								System.out.println("拖动操作的最后坐标为：" + position1);
 								ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position1);
 								this.setNode(anActionNode);
 							}
