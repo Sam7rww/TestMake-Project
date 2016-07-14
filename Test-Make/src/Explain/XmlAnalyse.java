@@ -40,7 +40,7 @@ public class XmlAnalyse {
 			// 创建documentBuilder对象
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
-			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/File.xml");
+			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(1).xml");
 			// 获取所有book节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
@@ -119,7 +119,7 @@ public class XmlAnalyse {
 							/*
 							 * 针对不同的type属性进行不同的解析过程
 							 */
-							if (type.equalsIgnoreCase("component")) {
+							if (type.contains("Component")) {
 								// NodeList detailOpe =
 								// operation.getChildNodes();
 								String type2 = null;
@@ -128,11 +128,11 @@ public class XmlAnalyse {
 									if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
 										// System.out.println("操作的组件类型："+childNodes.item(k).getNodeName());
 										// System.out.println("操作的组件的text内容："+childNodes.item(k).getTextContent());
-										if (childNodes.item(k).getNodeName().equalsIgnoreCase("type")) {
+										if (childNodes.item(k).getNodeName().equalsIgnoreCase("componentType")) {
 											type2 = childNodes.item(k).getTextContent();
 //											System.out.println(type2);
 										}
-										if (childNodes.item(k).getNodeName().equalsIgnoreCase("resourceId")) {
+										if (childNodes.item(k).getNodeName().equalsIgnoreCase("index")) {
 											Text = childNodes.item(k).getTextContent();
 //											System.out.println(Text);
 										}
@@ -146,7 +146,7 @@ public class XmlAnalyse {
 								}
 
 								this.setNode(anActionNode);
-							} else if (type.equalsIgnoreCase("singlePoint")) {
+							} else if (type.contains("SinglePoint")) {
 								// Type type2 = null;
 								String position = null;
 								for (int k = 0; k < childNodes.getLength(); k++) {

@@ -38,7 +38,7 @@ public class TestGenerator {
 //		ans += "public void testOnClick()" + "\n";
 //		ans += "{\n";
 		String ans = "";
-
+		System.out.println("王栋是傻逼"+actionNode.getAction());
 		// while (actionNode.getAction() != Action.ORACLE) {
 		switch (actionNode.getAction()) {
 		case CLICK:

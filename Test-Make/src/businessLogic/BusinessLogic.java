@@ -10,6 +10,7 @@ public class BusinessLogic {
 	public List<ActionNode> GetAllAction(){
 		XmlAnalyse analyseAction = new XmlAnalyse();
 		List<ActionNode> actionList = analyseAction.GetAction();
+		System.out.println("asasfa"+actionList.get(0).getAction());
 		for(int i=0;i<actionList.size();i++){
 			ActionNode anActionNode = actionList.get(i);
 			while(anActionNode.getNext()!=null){
@@ -23,8 +24,13 @@ public class BusinessLogic {
 			System.out.println(anActionNode.getType());
 			System.out.println(anActionNode.getComponentid());
 			System.out.println(anActionNode.getPosition());
+			
+			
 			String result = new TestGenerator().generatorCompleteTest();
-			new TestAssist().generator(anActionNode, result);
+			System.out.println("王栋去死吧");
+			TestAssist testAssist = new TestAssist();
+			testAssist.generator(anActionNode, result);
+//			new TestAssist().generator(anActionNode, result);
 //			System.out.println("heheda");
 		}
 		

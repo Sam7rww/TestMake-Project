@@ -8,7 +8,8 @@ import Explain.Action;
 import Node.ActionNode;
 
 public class TestAssist {
-	public String storePath = ".\\Script\\";
+//	public String storePath = ".\\Script\\";
+	public String storePath = "/Users/sam/TestMake-Project/Test-Make/Script/";
 	public String TestCaseClassName = "Script";
 
 	// num表示生成脚本的个数
@@ -30,7 +31,7 @@ public class TestAssist {
 	public void generator(ActionNode actionNode, String res) {
 
 		while (actionNode.getAction() != Action.ORACLE) {
-//			System.out.println(actionNode.getAction());
+			System.out.println(actionNode.getAction());
 			if (actionNode.getAction() == Action.DRAG) {
 				String path[] = actionNode.getPosition().split("#");
 				if (path.length == 3) {
@@ -57,6 +58,7 @@ public class TestAssist {
 								actionNode.getComponentid(), temp);
 						// actionNode.setPosition(path[0] + "#" + x + "|" + y
 						// + "|");
+//						System.out.println("王栋是SB");
 						String ans = res
 								+ testGenerator.generatorTestCore(tempNode);
 						generator(actionNode.getNext(), ans);
@@ -70,6 +72,7 @@ public class TestAssist {
 					actionNode = actionNode.getNext();
 				}
 			} else {
+				System.out.println("王栋是SB");
 				res += testGenerator.generatorTestCore(actionNode);
 				actionNode = actionNode.getNext();
 			}

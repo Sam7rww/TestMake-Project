@@ -24,21 +24,6 @@ public void tearDown() throws Exception {
 /*------ Test Core Function ------*/
 public void testOnClick()
 {
-// Click-TestAction-In-TestState
-solo.clickOnScreen((float)231.9, (float)9);
-
-// Click-TestAction-In-TestState
-solo.clickOnTextView("text1");
-
-// Drag-TestAction-In-TestState
-solo.drag((float)1.1, (float)77.589645,(float)2.2,(float)185.25455);
-
-// Drag-TestAction-In-TestState
-solo.drag((float)11.1, (float)19.562895,(float)12.2,(float)21.008335);
-
-// Click-TestAction-In-TestState
-solo.clickOnMenuItem("Item1");
-
 solo.sleep(1000);
 
 ScreenShot ss = new ScreenShot("test_sc");
@@ -46,7 +31,7 @@ ScreenShot ss = new ScreenShot("test_sc");
 Bitmap bitmap = ss.getScreenShot();
 
 // Assert-Text
-boolean test_result = solo.searchText("Note 1 test);
+boolean test_result = solo.searchText("0 correct);
 
 assertTrue("Test: Failed.", test_result);
 }

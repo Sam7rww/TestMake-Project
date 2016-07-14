@@ -31,7 +31,7 @@ ScreenShot ss = new ScreenShot("test_sc");
 Bitmap bitmap = ss.getScreenShot();
 
 // Assert-Text
-boolean test_result = solo.searchText("14528);
+boolean test_result = solo.searchText("0 correct);
 
 assertTrue("Test: Failed.", test_result);
 }

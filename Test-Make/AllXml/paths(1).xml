@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+    <path>
+        <operation type = "impl.area.Component" action = "CLICK" delayTime = "0">
+            <index>Training</index>
+            <componentType>Button</componentType>
+        </operation>
+        <operation type = "impl.area.Component" action = "CLICK" delayTime = "0">
+            <index>sol</index>
+            <componentType>Button</componentType>
+        </operation>
+        <oracle type = "impl.oracle_result.SingleComponentResult">
+            <singleComponent>
+                <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+                <resultType>TEXT</resultType>
+                <componentType>TextView</componentType>
+                <expect>0 correct</expect>
+            </singleComponent>
+        </oracle>
+    </path>
+</paths>
