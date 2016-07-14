@@ -23,6 +23,9 @@ public class BusinessLogic {
 			System.out.println(anActionNode.getType());
 			System.out.println(anActionNode.getComponentid());
 			System.out.println(anActionNode.getPosition());
+			String result = new TestGenerator().generatorCompleteTest();
+			new TestAssist().generator(anActionNode, result);
+//			System.out.println("heheda");
 		}
 		
 		
