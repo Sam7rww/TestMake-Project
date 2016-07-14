@@ -12,11 +12,10 @@ public class TestGenerator {
 	public static String teardownFunction = "public void tearDown() throws Exception { \n solo.finishOpenedActivities(); \n }\n\n";
 
 	public String testApplicationName; // = "SimpleGUI"
-	public String testApplicationPackageName;
-	public String MainActivityName;
-	public String TestCaseClassName;
+	public String testApplicationPackageName = "";
+	public String MainActivityName = "MainActivityName";
+	public String TestCaseClassName = "test";
 
-	String ans = "";
 
 	boolean is_drag = false;
 	
@@ -38,7 +37,7 @@ public class TestGenerator {
 //		ans += "/*------ Test Core Function ------*/\n";
 //		ans += "public void testOnClick()" + "\n";
 //		ans += "{\n";
-
+		String ans = "";
 
 		// while (actionNode.getAction() != Action.ORACLE) {
 		switch (actionNode.getAction()) {
@@ -97,11 +96,10 @@ public class TestGenerator {
 	}
 
 	/**
-	 * @param actionNode
 	 * @return
 	 * TODO 生成导包等辅助语句
 	 */
-	public String generatorCompleteTest(ActionNode actionNode) {
+	public String generatorCompleteTest() {
 		String ans = "";
 
 		if (!testApplicationPackageName.equals("")) {
@@ -146,24 +144,31 @@ public class TestGenerator {
 	 */
 	public String testOracleSequence(ActionNode actionNode) {
 		// Test Oracle Sequence
+		System.out.println("Test Oracle Sequence");
 
-		ans += "solo.sleep(10000)\n\n";
+		String ans = "";
+		
+		ans += "solo.sleep(1000);\n\n";
 		ans += "ScreenShot ss = new ScreenShot(\"" + TestCaseClassName
 				+ "_sc\");\n\n";
 		ans += "Bitmap bitmap = ss.getScreenShot();\n\n";
 
-		if (is_drag) {
+		String indexAndType[] = actionNode.getType().split("\\|");
+		if (indexAndType[1].equals("IMAGE")) {
+			ans += "// Assert-Image\n";
 			ans += "boolean " + testResultName
 					+ " = (bitmap.getPixel(307, 436) == -1);\n\n";
-		} else {
-
+		} else if(indexAndType[1].equals("TEXT")){
+			ans += "// Assert-Text\n";
+			ans += "boolean " + testResultName
+					+ " = solo.searchText(\""+actionNode.getPosition()+");\n\n";
 		}
 		ans += "assertTrue(\"" + "Test: Failed." + "\", " + testResultName
 				+ ");\n";
 
 		ans += "}\n";
 		ans += "/*--------------------------------*/\n";
-		return null;
+		return ans;
 	}
 
 }
