@@ -2,12 +2,12 @@ import com.robotium.solo.Solo;
 import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 
-public class test extends ActivityInstrumentationTestCase2<MainActivityName>
+public class ScriptTest extends ActivityInstrumentationTestCase2<MainActivityName>
 {
 private Solo solo;
 
 @SuppressLint("NewApi")
-public test(){
+public ScriptTest(){
 super(MainActivityName.class);
 }
 
@@ -28,13 +28,9 @@ public void testOnClick()
 solo.clickOnButton("Training");
 
 // Drag-TestAction-In-TestState
-solo.drag((float)403.13, (float)353.96735,(float)980.8,(float)980.071355);
+solo.drag((float)403.13, (float)250.17531,(float)980.8,(float)934.620675);
 
 solo.sleep(1000);
-
-ScreenShot ss = new ScreenShot("test_sc");
-
-Bitmap bitmap = ss.getScreenShot();
 
 // Assert-Text
 boolean test_result = solo.searchText("111");

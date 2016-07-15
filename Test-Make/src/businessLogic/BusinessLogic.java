@@ -8,6 +8,7 @@ import Node.ActionNode;
 public class BusinessLogic {
 	
 	public List<ActionNode> GetAllAction(){
+		String name = "Test";
 		XmlAnalyse analyseAction = new XmlAnalyse();
 		List<ActionNode> actionList = analyseAction.GetAction();
 		System.out.println("asasfa"+actionList.get(0).getAction());
@@ -30,7 +31,9 @@ public class BusinessLogic {
 			System.out.println("王栋去死吧");
 //			TestAssist testAssist = new TestAssist();
 //			testAssist.generator(anActionNode, result);
-			new TestAssist().generator(anActionNode, result);
+			String Name = name+(i+"");
+//			System.out.println(Name);
+			new TestAssist().generator(anActionNode, result,Name);
 //			System.out.println("heheda");
 		}
 		
