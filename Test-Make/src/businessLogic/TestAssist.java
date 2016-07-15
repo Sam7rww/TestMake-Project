@@ -10,7 +10,7 @@ import Node.ActionNode;
 public class TestAssist {
 //	public String storePath = ".\\Script\\";
 	public String storePath = "/Users/sam/TestMake-Project/Test-Make/Script/";
-	public String TestCaseClassName = "ScriptTest";
+	public String TestCaseClassName = "";
 
 	// num表示生成脚本的个数
 	int num = 3;
@@ -26,7 +26,7 @@ public class TestAssist {
 	 * @param res
 	 *            TODO 遍历一条路径
 	 */
-	public void generator(ActionNode actionNode, String res) {
+	public void generator(ActionNode actionNode, String res, String fileName) {
 
 		while (actionNode.getAction() != Action.ORACLE) {
 			if (actionNode.getAction() == Action.DRAG) {
@@ -48,7 +48,7 @@ public class TestAssist {
 								actionNode.getComponentid(), temp);
 						String ans = res
 								+ testGenerator.generatorTestCore(tempNode);
-						generator(actionNode.getNext(), ans);
+						generator(actionNode.getNext(), ans, fileName);
 					}
 					is_drag = true;
 					break;
@@ -66,7 +66,7 @@ public class TestAssist {
 			res += testGenerator.testOracleSequence(actionNode);
 			res += "}\n";
 			scriptNum++;
-			StoreTestCase(res, scriptNum);
+			StoreTestCase(res, fileName+scriptNum);
 		}
 	}
 
@@ -74,14 +74,14 @@ public class TestAssist {
 	 * @param mid
 	 *            TODO 存储文件
 	 */
-	public void StoreTestCase(String mid, int k) {
+	public void StoreTestCase(String mid, String s) {
 		if (!storePath.equals("")) {
-			File fi = new File(storePath + TestCaseClassName + k + ".java");
+			File fi = new File(storePath + TestCaseClassName + s + ".java");
 			if (!(fi.exists())) {
 				try {
 					fi.createNewFile();
 				} catch (IOException e) {
-					System.out.println(storePath + TestCaseClassName + k
+					System.out.println(storePath + TestCaseClassName + s
 							+ ".java" + ": " + e.toString());
 					e.printStackTrace();
 				}
