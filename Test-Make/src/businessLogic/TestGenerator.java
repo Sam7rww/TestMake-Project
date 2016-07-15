@@ -14,7 +14,7 @@ public class TestGenerator {
 	public String testApplicationName; // = "SimpleGUI"
 	public String testApplicationPackageName = "";
 	public String MainActivityName = "MainActivityName";
-	public String TestCaseClassName = "test";
+	public String TestCaseClassName = "ScriptTest";
 
 
 	boolean is_drag = false;
@@ -34,12 +34,7 @@ public class TestGenerator {
 	 * TODO 根据一个节点生成一条测试语句
 	 */
 	public String generatorTestCore(ActionNode actionNode) {
-//		ans += "/*------ Test Core Function ------*/\n";
-//		ans += "public void testOnClick()" + "\n";
-//		ans += "{\n";
 		String ans = "";
-		System.out.println("王栋是傻逼"+actionNode.getAction());
-		// while (actionNode.getAction() != Action.ORACLE) {
 		switch (actionNode.getAction()) {
 		case CLICK:
 			ans += "// Click-TestAction-In-TestState\n";
@@ -89,8 +84,6 @@ public class TestGenerator {
 
 			break;
 		}
-		// actionNode = actionNode.getNext();
-		// }
 
 		return ans;
 	}
@@ -127,9 +120,6 @@ public class TestGenerator {
 		ans += overrideState;
 		ans += teardownFunction;
 
-		// 加入针对该链表的测试
-		// ans += generatorTestCore(actionNode);
-		// ans += "}\n";
 		ans += "/*------ Test Core Function ------*/\n";
 		ans += "public void testOnClick()" + "\n";
 		ans += "{\n";
@@ -149,9 +139,10 @@ public class TestGenerator {
 		String ans = "";
 		
 		ans += "solo.sleep(1000);\n\n";
-		ans += "ScreenShot ss = new ScreenShot(\"" + TestCaseClassName
-				+ "_sc\");\n\n";
-		ans += "Bitmap bitmap = ss.getScreenShot();\n\n";
+		//会报错
+//		ans += "ScreenShot ss = new ScreenShot(\"" + TestCaseClassName
+//				+ "_sc\");\n\n";
+//		ans += "Bitmap bitmap = ss.getScreenShot();\n\n";
 
 		String indexAndType[] = actionNode.getType().split("\\|");
 		if (indexAndType[1].equals("IMAGE")) {
