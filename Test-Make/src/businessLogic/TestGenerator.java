@@ -161,7 +161,7 @@ public class TestGenerator {
 		} else if(indexAndType[1].equals("TEXT")){
 			ans += "// Assert-Text\n";
 			ans += "boolean " + testResultName
-					+ " = solo.searchText(\""+actionNode.getPosition()+");\n\n";
+					+ " = solo.searchText(\""+actionNode.getPosition()+"\");\n\n";
 		}
 		ans += "assertTrue(\"" + "Test: Failed." + "\", " + testResultName
 				+ ");\n";

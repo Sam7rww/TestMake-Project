@@ -40,7 +40,7 @@ public class XmlAnalyse {
 			// 创建documentBuilder对象
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
-			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(1).xml");
+			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(4).xml");
 			// 获取所有book节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
@@ -119,7 +119,7 @@ public class XmlAnalyse {
 							/*
 							 * 针对不同的type属性进行不同的解析过程
 							 */
-							if (type.contains("Component")) {
+							if (type.equalsIgnoreCase("impl.area.Component")) {
 								// NodeList detailOpe =
 								// operation.getChildNodes();
 								String type2 = null;
@@ -216,7 +216,7 @@ public class XmlAnalyse {
 //								System.out.println("doublePoint的结果为：" + position);
 								ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position);
 								this.setNode(anActionNode);
-							} else if (type.equalsIgnoreCase("pointToArea")) {
+							} else if (type.equalsIgnoreCase("impl.area.DragRange")) {
 								// 位置
 								String position1 = null;
 								String position2 = null;

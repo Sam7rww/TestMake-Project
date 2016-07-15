@@ -27,8 +27,8 @@ public void testOnClick()
 // Click-TestAction-In-TestState
 solo.clickOnButton("Training");
 
-// Click-TestAction-In-TestState
-solo.clickOnButton("re");
+// Drag-TestAction-In-TestState
+solo.drag((float)403.13, (float)353.96735,(float)980.8,(float)980.071355);
 
 solo.sleep(1000);
 
