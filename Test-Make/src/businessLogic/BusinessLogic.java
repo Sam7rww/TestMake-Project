@@ -29,11 +29,8 @@ public class BusinessLogic {
 			
 			String result = new TestGenerator().generatorCompleteTest();
 			System.out.println("王栋去死吧");
-//			TestAssist testAssist = new TestAssist();
-//			testAssist.generator(anActionNode, result);
-			String Name = name+(i+"");
-//			System.out.println(Name);
-			new TestAssist().generator(anActionNode, result,Name);
+
+			new TestAssist().generator(anActionNode, result,name+i);
 //			System.out.println("heheda");
 		}
 		
