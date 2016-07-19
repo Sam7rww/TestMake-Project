@@ -34,6 +34,8 @@ public class BusinessLogic {
 			String Name = name+(i+"");
 //			System.out.println(Name);
 			new TestAssist().generator(anActionNode, result,Name);
+			System.out.println("王栋去死吧");
+
 //			System.out.println("heheda");
 		}
 		
