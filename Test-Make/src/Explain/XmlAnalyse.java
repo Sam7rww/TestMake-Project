@@ -40,7 +40,7 @@ public class XmlAnalyse {
 			// 创建documentBuilder对象
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
-			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(4).xml");
+			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(5).xml");
 			// 获取所有book节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度

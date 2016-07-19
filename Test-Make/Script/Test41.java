@@ -2,13 +2,13 @@ import com.robotium.solo.Solo;
 import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 
-public class ScriptTest extends ActivityInstrumentationTestCase2<MainActivityName>
+public class ScriptTest extends ActivityInstrumentationTestCase2<MainMenu>
 {
 private Solo solo;
 
 @SuppressLint("NewApi")
 public ScriptTest(){
-super(MainActivityName.class);
+super(MainMenu.class);
 }
 
 @Override
@@ -34,7 +34,7 @@ solo.clickOnButton("re");
 solo.clickOnButton("si");
 
 // Click-TestAction-In-TestState
-solo.clickOnButton("mi");
+solo.clickOnnull("null");
 
 // Click-TestAction-In-TestState
 solo.clickOnButton("sol");
@@ -54,7 +54,7 @@ solo.clickOnButton("End Game");
 solo.sleep(1000);
 
 // Assert-Text
-boolean test_result = solo.searchText("666");
+boolean test_result = solo.searchText("correct");
 
 assertTrue("Test: Failed.", test_result);
 }

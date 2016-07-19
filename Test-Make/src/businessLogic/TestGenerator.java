@@ -13,7 +13,7 @@ public class TestGenerator {
 
 	public String testApplicationName; // = "SimpleGUI"
 	public String testApplicationPackageName = "";
-	public String MainActivityName = "MainActivityName";
+	public String MainActivityName = "MainMenu";
 	public String TestCaseClassName = "ScriptTest";
 
 
@@ -74,7 +74,7 @@ public class TestGenerator {
 			String[] pos1 = pos[0].split("\\|");
 			String[] pos2 = pos[1].split("\\|");
 			ans += "solo.drag((float)" + pos1[0] + ", (float)" + pos2[0]
-					+ ",(float)" + pos1[1] + ",(float)" + pos2[1] + stepCount
+					+ ",(float)" + pos1[1] + ",(float)" + pos2[1] + ","+stepCount
 					+ ");\n\n";
 
 			is_drag = true;

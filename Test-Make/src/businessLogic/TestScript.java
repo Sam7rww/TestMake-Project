@@ -19,7 +19,7 @@ public class TestScript {
 		a1.setNext(a6);
 		
 		String result = new TestGenerator().generatorCompleteTest();
-		new TestAssist().generator(a2, result);
+		new TestAssist().generator(a2, result,"");
 		System.out.println("heheda");
 	}
 }
