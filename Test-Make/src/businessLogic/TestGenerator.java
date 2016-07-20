@@ -1,5 +1,6 @@
 package businessLogic;
 
+import Explain.Action;
 import Node.ActionNode;
 
 public class TestGenerator {
@@ -16,9 +17,8 @@ public class TestGenerator {
 	public String MainActivityName = "MainMenu";
 	public String TestCaseClassName = "ScriptTest";
 
-
 	boolean is_drag = false;
-	
+
 	// ActionNode actionNode;
 
 	// public TestGenerator(ActionNode an) {
@@ -30,8 +30,7 @@ public class TestGenerator {
 
 	/**
 	 * @param actionNode
-	 * @return
-	 * TODO 根据一个节点生成一条测试语句
+	 * @return TODO 根据一个节点生成一条测试语句
 	 */
 	public String generatorTestCore(ActionNode actionNode) {
 		String ans = "";
@@ -74,8 +73,8 @@ public class TestGenerator {
 			String[] pos1 = pos[0].split("\\|");
 			String[] pos2 = pos[1].split("\\|");
 			ans += "solo.drag((float)" + pos1[0] + ", (float)" + pos2[0]
-					+ ",(float)" + pos1[1] + ",(float)" + pos2[1] + ","+stepCount
-					+ ");\n\n";
+					+ ",(float)" + pos1[1] + ",(float)" + pos2[1] + ","
+					+ stepCount + ");\n\n";
 
 			is_drag = true;
 
@@ -89,8 +88,7 @@ public class TestGenerator {
 	}
 
 	/**
-	 * @return
-	 * TODO 生成导包等辅助语句
+	 * @return TODO 生成导包等辅助语句
 	 */
 	public String generatorCompleteTest() {
 		String ans = "";
@@ -123,37 +121,54 @@ public class TestGenerator {
 		ans += "/*------ Test Core Function ------*/\n";
 		ans += "public void testOnClick()" + "\n";
 		ans += "{\n";
-		
+
 		return ans;
 	}
 
 	/**
 	 * @param actionNode
-	 * @return
-	 * TODO 生成Oracle测试语句
+	 * @return TODO 生成Oracle测试语句
 	 */
 	public String testOracleSequence(ActionNode actionNode) {
 		// Test Oracle Sequence
 		System.out.println("Test Oracle Sequence");
 
 		String ans = "";
-		
-		ans += "solo.sleep(1000);\n\n";
-		//会报错
-//		ans += "ScreenShot ss = new ScreenShot(\"" + TestCaseClassName
-//				+ "_sc\");\n\n";
-//		ans += "Bitmap bitmap = ss.getScreenShot();\n\n";
 
-		String indexAndType[] = actionNode.getType().split("\\|");
-		if (indexAndType[1].equals("IMAGE")) {
-			ans += "// Assert-Image\n";
-			ans += "boolean " + testResultName
-					+ " = (bitmap.getPixel(307, 436) == -1);\n\n";
-		} else if(indexAndType[1].equals("TEXT")){
-			ans += "// Assert-Text\n";
-			ans += "boolean " + testResultName
-					+ " = solo.searchText(\""+actionNode.getPosition()+"\");\n\n";
+		ans += "solo.sleep(1000);\n\n";
+		// 会报错
+		// ans += "ScreenShot ss = new ScreenShot(\"" + TestCaseClassName
+		// + "_sc\");\n\n";
+		// ans += "Bitmap bitmap = ss.getScreenShot();\n\n";
+
+		int i = 1;
+		while (actionNode != null) {
+
+			String indexAndType[] = actionNode.getType().split("\\|");
+			if (indexAndType[1].equals("IMAGE")) {
+				ans += "// Assert-Image\n";
+				// ans += "boolean " + testResultName
+				// + " = (bitmap.getPixel(307, 436) == -1);\n\n";
+			} else if (indexAndType[1].equals("TEXT")) {
+				ans += "// Assert-Text\n";
+				ans += "boolean test" + i + " = solo.searchText(\""
+						+ actionNode.getPosition() + "\");\n\n";
+			}
+			if (i == 1) {
+				ans += "boolean " + testResultName + ";\n";
+				ans += testResultName + " = test1;\n";
+			}
+			if (actionNode.getAction() == Action.OR) {
+				ans += testResultName + " = " + testResultName + "||" + "test"
+						+ i + ";\n";
+			} else if (actionNode.getAction() == Action.AND) {
+				ans += testResultName + " = " + testResultName + "&&" + "test"
+						+ i + ";\n";
+			}
+			i++;
+			actionNode = actionNode.getNext();
 		}
+
 		ans += "assertTrue(\"" + "Test: Failed." + "\", " + testResultName
 				+ ");\n";
 
