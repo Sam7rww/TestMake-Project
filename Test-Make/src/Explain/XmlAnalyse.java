@@ -413,6 +413,18 @@ public class XmlAnalyse {
 			}
 			OpeFstAndOr = true;
 			System.out.println("--------------结束遍历与或非操作--------------");
+		}else if (type.equalsIgnoreCase("AndOperation")) {
+			System.out.println("--------------开始遍历与或非操作--------------");
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {// or的根节点
+					String opeName = childNodes.item(i).getNodeName();
+					NodeList childList = childNodes.item(i).getChildNodes(); // or的全部子节点
+					this.solveAndOr(opeName, childList);
+
+				}
+			}
+			OpeFstAndOr = true;
+			System.out.println("--------------结束遍历与或非操作--------------");
 		}
 	}
 
