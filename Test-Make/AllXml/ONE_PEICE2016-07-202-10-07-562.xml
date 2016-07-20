@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+	<path>
+		<operation type="DoublePoint" action="DRAG" delayTime="0">
+			<DoublePoint>
+				<singlePoint>
+					<pointX>60.19</pointX>
+					<pointY>73.16</pointY>
+				</singlePoint>
+				<singlePoint>
+					<pointX>690.19</pointX>
+					<pointY>373.16</pointY>
+				</singlePoint>
+			</DoublePoint>
+		</operation>
+		<operation type="SinglePoint" action="LCLICK" delayTime="0">
+			<singlePoint>
+				<pointX>258.21</pointX>
+				<pointY>547.19</pointY>
+			</singlePoint>
+		</operation>
+		<operation type="DragRange" action="DRAG" delayTime="0">
+			<DragRange>
+				<singlePoint>
+					<pointX>558.21</pointX>
+					<pointY>347.19</pointY>
+				</singlePoint>
+				<doublePoint>
+					<singlePoint>
+						<pointX>95.23</pointX>
+						<pointY>110.23</pointY>
+					</singlePoint>
+					<singlePoint>
+						<pointX>100.23</pointX>
+						<pointY>120.23</pointY>
+					</singlePoint>
+				</doublePoint>
+			</DragRange>
+		</operation>
+		<oracle type="SingleComponentResult">
+			<singleComponent>
+				<index>3</index>
+				<resultType>IMAGE</resultType>
+				<componentType>button</componentType>
+				<expect>14528</expect>
+			</singleComponent>
+		</oracle>
+	</path>
+	<path>
+		<operation type="SinglePoint" action="CLICK" delayTime="0">
+			<singlePoint>
+				<pointX>690.19</pointX>
+				<pointY>373.16</pointY>
+			</singlePoint>
+		</operation>
+		<operation type="SinglePoint" action="CLICK" delayTime="0">
+			<singlePoint>
+				<pointX>258.21</pointX>
+				<pointY>547.19</pointY>
+			</singlePoint>
+		</operation>
+		<operation type="DragRange" action="DRAG" delayTime="0">
+			<DragRange>
+				<singlePoint>
+					<pointX>258.21</pointX>
+					<pointY>547.19</pointY>
+				</singlePoint>
+				<doublePoint>
+					<singlePoint>
+						<pointX>100.23</pointX>
+						<pointY>110.23</pointY>
+					</singlePoint>
+					<singlePoint>
+						<pointX>100.23</pointX>
+						<pointY>110.23</pointY>
+					</singlePoint>
+				</doublePoint>
+			</DragRange>
+		</operation>
+		<oracle type="SingleComponentResult">
+			<singleComponent>
+				<index>0</index>
+				<resultType>TEXT</resultType>
+				<componentType>editView</componentType>
+				<expect>15528</expect>
+			</singleComponent>
+		</oracle>
+	</path>
+	<path>
+		<operation type="SinglePoint" action="CLICK" delayTime="0">
+			<singlePoint>
+				<pointX>690.19</pointX>
+				<pointY>373.16</pointY>
+			</singlePoint>
+		</operation>
+		<operation type="SinglePoint" action="CLICK" delayTime="0">
+			<singlePoint>
+				<pointX>258.21</pointX>
+				<pointY>547.19</pointY>
+			</singlePoint>
+		</operation>
+		<operation type="DragRange" action="DRAG" delayTime="0">
+			<DragRange>
+				<singlePoint>
+					<pointX>58.21</pointX>
+					<pointY>47.19</pointY>
+				</singlePoint>
+				<doublePoint>
+					<singlePoint>
+						<pointX>100.23</pointX>
+						<pointY>1210.23</pointY>
+					</singlePoint>
+					<singlePoint>
+						<pointX>170.33</pointX>
+						<pointY>114.37</pointY>
+					</singlePoint>
+				</doublePoint>
+			</DragRange>
+		</operation>
+		<oracle type="SingleComponentResult">
+			<singleComponent>
+				<index>3</index>
+				<resultType>IMAGE</resultType>
+				<componentType>button</componentType>
+				<expect>14528</expect>
+			</singleComponent>
+		</oracle>
+	</path>
+	<path>
+		<operation type="DoublePoint" action="DRAG" delayTime="0">
+			<DoublePoint>
+				<singlePoint>
+					<pointX>60.19</pointX>
+					<pointY>73.16</pointY>
+				</singlePoint>
+				<singlePoint>
+					<pointX>690.19</pointX>
+					<pointY>373.16</pointY>
+				</singlePoint>
+			</DoublePoint>
+		</operation>
+		<operation type="SinglePoint" action="LCLICK" delayTime="0">
+			<singlePoint>
+				<pointX>258.21</pointX>
+				<pointY>547.19</pointY>
+			</singlePoint>
+		</operation>
+		<operation type="DragRange" action="DRAG" delayTime="0">
+			<DragRange>
+				<singlePoint>
+					<pointX>278.71</pointX>
+					<pointY>567.69</pointY>
+				</singlePoint>
+				<doublePoint>
+					<singlePoint>
+						<pointX>290.23</pointX>
+						<pointY>170.23</pointY>
+					</singlePoint>
+					<singlePoint>
+						<pointX>180.23</pointX>
+						<pointY>160.23</pointY>
+					</singlePoint>
+				</doublePoint>
+			</DragRange>
+		</operation>
+		<oracle type="SingleComponentResult">
+			<singleComponent>
+				<index>0</index>
+				<resultType>TEXT</resultType>
+				<componentType>editView</componentType>
+				<expect>15528</expect>
+			</singleComponent>
+		</oracle>
+	</path>
+</paths>

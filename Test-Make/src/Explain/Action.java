@@ -4,7 +4,7 @@ package Explain;
  * Created by Administrator on 2016/7/8.
  */
 public enum Action {
-    DRAG,CLICK,DCLICK,LCLICK,ORACLE;
+    DRAG,CLICK,DCLICK,LCLICK,ORACLE,AND,OR,NOT;
     
     public static Action valueOf(int cur_action) {
 		// TODO Auto-generated method stub
@@ -32,6 +32,12 @@ public enum Action {
 			return Action.LCLICK;
 		case "oracle":
 			return Action.ORACLE;
+		case "and":
+			return Action.AND;
+		case "or":
+			return Action.OR;
+		case "not":
+			return Action.NOT;
 		default:
 			return null;
 		}

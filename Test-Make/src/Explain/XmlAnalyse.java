@@ -28,6 +28,8 @@ public class XmlAnalyse {
 
 	private boolean isFirst = true;
 
+	private boolean OpeFstAndOr = true;
+
 	public List<ActionNode> GetAction() {
 		// 创建一个documentBuildFactory的对象
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -40,14 +42,16 @@ public class XmlAnalyse {
 			// 创建documentBuilder对象
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
-			Document document = db.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(5).xml");
-			// 获取所有book节点的集合
+			Document document = db
+					.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/2016-07-202-10-07-430.xml");
+			// 获取所有path节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
-//			System.out.println("一共有" + pathlist.getLength() + "条路");
+			// System.out.println("一共有" + pathlist.getLength() + "条路");
 
 			for (int i = 0; i < pathlist.getLength(); i++) {
-//				System.out.println("=====================下面开始遍历第" + (i + 1) + "条路的内容=====================");
+				// System.out.println("=====================下面开始遍历第" + (i + 1) +
+				// "条路的内容=====================");
 				// 通过Item(index)方法获取一个operation节点，nodelist的索引值从0开始
 				// 将book节点进行强制类型转换，转换为Element类型
 				Element path = (Element) pathlist.item(i); // 第i条路
@@ -55,12 +59,14 @@ public class XmlAnalyse {
 				// 解析path节点(即当前路)的子节点
 				NodeList OperationList = path.getChildNodes();
 				// 通过NodeList的getLength方法可以获取bookList的长度
-//				System.out.println("当前一共有" + OperationList.getLength() + "个操作");
+				// System.out.println("当前一共有" + OperationList.getLength() +
+				// "个操作");
 				int ope = 0;
 				for (int j = 0; j < OperationList.getLength(); j++) {
 					// 区分出text类型的node以及element类型的node 节点
 					if (OperationList.item(j).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-//						System.out.println("================下面开始遍历第" + (ope + 1) + "个操作的内容================");
+						// System.out.println("================下面开始遍历第" + (ope +
+						// 1) + "个操作的内容================");
 						ope++;
 						// 解析operation节点
 						Element operation = (Element) OperationList.item(j);
@@ -69,219 +75,35 @@ public class XmlAnalyse {
 						// 通过type，Action取得属性
 						String type = operation.getAttribute("type");
 						String action = operation.getAttribute("action");
-//						System.out.println(Opename);
-//						System.out.println("第" + (ope) + "个操作的类型为：" + type);
-//						System.out.println("第" + ope + "个操作的动作为：" + action);
+						// System.out.println(Opename);
+						// System.out.println("第" + (ope) + "个操作的类型为：" + type);
+						// System.out.println("第" + ope + "个操作的动作为：" + action);
 
 						NodeList childNodes = operation.getChildNodes();
-//						System.out.println("一共有" + childNodes.getLength() + "个子节点");
+						// System.out.println("一共有" + childNodes.getLength() +
+						// "个子节点");
 
 						if (Opename.equalsIgnoreCase("oracle")) {
-//							System.out.println("这是一个Oracle哦！！");
-							if (type.contains("SingleComponentResult")) {
-								String theType = null;
-								String theComponent = null;
-								String thePos = null;
-								for(int l=0;l<childNodes.getLength();l++){
-									if (childNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {
-//										System.out.println(childNodes.item(l).getNodeName());
-										NodeList singleElement = childNodes.item(l).getChildNodes();
-										for(int m=0;m<singleElement.getLength();m++){
-											if (singleElement.item(m).getNodeType() == Node.ELEMENT_NODE) {
-												String NowString = singleElement.item(m).getNodeName();
-//												System.out.println("现在的子节点名字：" + NowString);
-												if (NowString.equalsIgnoreCase("index")) {
-													theType = singleElement.item(m).getTextContent();
-//													System.out.println(theType);
-												}
-												else if (NowString.equalsIgnoreCase("resultType")) {
-													theType += "|"+singleElement.item(m).getTextContent();
-//													System.out.println(theType);
-												}
-												else if (NowString.equalsIgnoreCase("componentType")) {
-													theComponent = singleElement.item(m).getTextContent();
-//													System.out.println(theComponent);
-												}
-												else if (NowString.equalsIgnoreCase("expect")) {
-													thePos = singleElement.item(m).getTextContent();
-//													System.out.println(thePos);
-												}
-											}
-										}
-									}
-								}
-								ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType, theComponent, thePos);
-								this.setNode(anActionNode);
-							}
-							
-							
-						} else {//路径中的Operation
+							this.solveOracle(type, action, childNodes);
+
+						} else {// 路径中的Operation
 							/*
 							 * 针对不同的type属性进行不同的解析过程
 							 */
-							if (type.equalsIgnoreCase("impl.area.Component")) {
-								// NodeList detailOpe =
-								// operation.getChildNodes();
-								String type2 = null;
-								String Text = null;
-								for (int k = 0; k < childNodes.getLength(); k++) {
-									if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-										// System.out.println("操作的组件类型："+childNodes.item(k).getNodeName());
-										// System.out.println("操作的组件的text内容："+childNodes.item(k).getTextContent());
-										if (childNodes.item(k).getNodeName().equalsIgnoreCase("componentType")) {
-											type2 = childNodes.item(k).getTextContent();
-//											System.out.println(type2);
-										}
-										if (childNodes.item(k).getNodeName().equalsIgnoreCase("index")) {
-											Text = childNodes.item(k).getTextContent();
-//											System.out.println(Text);
-										}
-									}
-								}
-								ActionNode anActionNode = null;
-								if (action.equalsIgnoreCase("click")) {
-									anActionNode = new ActionNode(null, Action.CLICK, type2, Text, null);
-								} else if (action.equalsIgnoreCase("longClick")) {
-									anActionNode = new ActionNode(null, Action.LCLICK, type2, Text, null);
-								}
+							if (type.equalsIgnoreCase("Component")) {
+								this.solveSingleComponent(childNodes, action);
 
-								this.setNode(anActionNode);
-							} else if (type.contains("SinglePoint")) {
-								// Type type2 = null;
-								String position = null;
-								for (int k = 0; k < childNodes.getLength(); k++) {
-									if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-//										System.out.println(childNodes.item(k).getNodeName());
-										NodeList singleNodes = childNodes.item(k).getChildNodes();
-										for (int l = 0; l < singleNodes.getLength(); l++) {
-											if (singleNodes.item(l).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-												String pos = singleNodes.item(l).getTextContent();
-//												System.out.println("点坐标为：" + pos);
-												if (position == null) {
-													position = pos;
-													position += "|";
-												} else {
-													position += pos;
-												}
-											}
-										}
-//										System.out.println(position);
-									}
-								}
-								ActionNode anActionNode = null;
-								if (action.equalsIgnoreCase("click")) {
-									anActionNode = new ActionNode(null, Action.CLICK, null, null, position);
-								} else if (action.equalsIgnoreCase("longClick")) {
-									anActionNode = new ActionNode(null, Action.LCLICK, null, null, position);
-								}
-								this.setNode(anActionNode);
-							} else if (type.equalsIgnoreCase("doublePoint")) {
-								// 位置
-								String position = null;
-								for (int k = 0; k < childNodes.getLength(); k++) {
-									if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {// doubleNode节点
-//										System.out.println(childNodes.item(k).getNodeName());
-										NodeList doubleNodes = childNodes.item(k).getChildNodes();
-										for (int l = 0; l < doubleNodes.getLength(); l++) {
-											// boolean IfFirstNode = true;
-											if (doubleNodes.item(l).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {// singleNode节点
-//												System.out.println(doubleNodes.item(l).getNodeName());
-												NodeList singleNodes = doubleNodes.item(l).getChildNodes();
-												String tempPosition = null;
-												for (int m = 0; m < singleNodes.getLength(); m++) {
-													if (singleNodes.item(m).getNodeType() == Node.ELEMENT_NODE) {// pointX/Y节点
-														String pos = singleNodes.item(m).getTextContent();
-//														System.out.println("点坐标为：" + pos);
-														if (tempPosition == null) {
-															tempPosition = pos;
-															tempPosition += "|";
-														} else {
-															tempPosition += pos;
-															// tempPosition +=
-															// "#";
-														}
-													}
-												}
-												if (position == null) {
-													position = tempPosition;
-													position += "#";
-												} else {
-													position += tempPosition;
-												}
-												tempPosition = null;
-											}
-										}
-									}
-								}
-//								System.out.println("doublePoint的结果为：" + position);
-								ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position);
-								this.setNode(anActionNode);
-							} else if (type.equalsIgnoreCase("impl.area.DragRange")) {
-								// 位置
-								String position1 = null;
-								String position2 = null;
-								for (int k = 0; k < childNodes.getLength(); k++) {
-									if (childNodes.item(k).getNodeType() == Node.ELEMENT_NODE) {// singlePoint和doublePoint子节点
-										String ChildNodeName = childNodes.item(k).getNodeName();
-//										System.out.println("当前子节点名字为（第一层子节点）：" + ChildNodeName);
+							} else if (type.contains("MultiComponent")) {
+								this.solveMultiComponent(childNodes, action);
 
-										if (ChildNodeName.equalsIgnoreCase("singlePoint")) {// singlePoint子节点
-//											System.out.println("----当前处理拖动的singlePoint----");
-											NodeList singleNode = childNodes.item(k).getChildNodes();
-											for (int l = 0; l < singleNode.getLength(); l++) {
-												if (singleNode.item(l).getNodeType() == Node.ELEMENT_NODE) {
-													String pos = singleNode.item(l).getTextContent();
-//													System.out.println("点坐标为：" + pos);
-													if (position1 == null) {
-														position1 = pos;
-														position1 += "|";
-													} else {
-														position1 += pos;
-													}
-												}
-											}
-//											System.out.println("SinglePoint的值为：" + position1);
-										} else { // doublePoint子节点
-//											System.out.println("----当前处理拖动的area----");
-											NodeList singleNodes = childNodes.item(k).getChildNodes();
-											for (int l = 0; l < singleNodes.getLength(); l++) { // 遍历doublePoint子节点
-												if (singleNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {// doublePoint子节点中的element(singlePoint)
-//													System.out.println(
-//															"area中的第一层子节点" + singleNodes.item(l).getNodeName());
-													NodeList pointNodes = singleNodes.item(l).getChildNodes();
-													String tempPosition = null;
-													for (int m = 0; m < pointNodes.getLength(); m++) {
-														if (pointNodes.item(m).getNodeType() == Node.ELEMENT_NODE) {// pointX/Y节点
-//															System.out.println(
-//																	"area中的第二层子节点" + pointNodes.item(m).getNodeName());
-															String pos = pointNodes.item(m).getTextContent();
-//															System.out.println("点坐标为：" + pos);
-															if (tempPosition == null) {
-																tempPosition = pos;
-																tempPosition += "|";
-															} else {
-																tempPosition += pos;
-																// tempPosition
-																// += "#";
-															}
-														}
-													}
-													if (position2 == null) {
-														position2 = tempPosition;
-														position2 += "#";
-													} else {
-														position2 += tempPosition;
-													}
-													tempPosition = null;
-												}
-											}
-										}
-									}
-								}
-								position1 = position1 + "#" + position2;
-//								System.out.println("拖动操作的最后坐标为：" + position1);
-								ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position1);
-								this.setNode(anActionNode);
+							} else if (type.equalsIgnoreCase("SinglePoint")) {
+								this.solveSinglePoint(childNodes, action);
+
+							} else if (type.equalsIgnoreCase("DoublePoint")) {
+								this.solveDoublePoint(childNodes, action);
+
+							} else if (type.equalsIgnoreCase("DragRange")) {
+								this.solveDragRange(childNodes, action);
 							}
 
 						} // element型子节点（operation）
@@ -316,6 +138,339 @@ public class XmlAnalyse {
 	//
 	// return null;
 	// }
+	public void solveSinglePoint(NodeList childNodes, String action) {
+		String position = null;
+		for (int k = 0; k < childNodes.getLength(); k++) {
+			if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+				// System.out.println(childNodes.item(k).getNodeName());
+				NodeList singleNodes = childNodes.item(k).getChildNodes();
+				for (int l = 0; l < singleNodes.getLength(); l++) {
+					if (singleNodes.item(l).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+						String pos = singleNodes.item(l).getTextContent();
+						// System.out.println("点坐标为：" + pos);
+						if (position == null) {
+							position = pos;
+							position += "|";
+						} else {
+							position += pos;
+						}
+					}
+				}
+				// System.out.println(position);
+			}
+		}
+		ActionNode anActionNode = null;
+		if (action.equalsIgnoreCase("click")) {
+			anActionNode = new ActionNode(null, Action.CLICK, null, null, position);
+		} else if (action.equalsIgnoreCase("LClick")) {
+			anActionNode = new ActionNode(null, Action.LCLICK, null, null, position);
+		}
+		this.setNode(anActionNode);
+	}
+
+	public void solveDoublePoint(NodeList childNodes, String action) {
+		// 位置
+		String position = null;
+		for (int k = 0; k < childNodes.getLength(); k++) {
+			if (childNodes.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {// doubleNode节点
+				// System.out.println(childNodes.item(k).getNodeName());
+				NodeList doubleNodes = childNodes.item(k).getChildNodes();
+				for (int l = 0; l < doubleNodes.getLength(); l++) {
+					// boolean IfFirstNode = true;
+					if (doubleNodes.item(l).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {// singleNode节点
+						// System.out.println(doubleNodes.item(l).getNodeName());
+						NodeList singleNodes = doubleNodes.item(l).getChildNodes();
+						String tempPosition = null;
+						for (int m = 0; m < singleNodes.getLength(); m++) {
+							if (singleNodes.item(m).getNodeType() == Node.ELEMENT_NODE) {// pointX/Y节点
+								String pos = singleNodes.item(m).getTextContent();
+								// System.out.println("点坐标为：" + pos);
+								if (tempPosition == null) {
+									tempPosition = pos;
+									tempPosition += "|";
+								} else {
+									tempPosition += pos;
+									// tempPosition +=
+									// "#";
+								}
+							}
+						}
+						if (position == null) {
+							position = tempPosition;
+							position += "#";
+						} else {
+							position += tempPosition;
+						}
+						tempPosition = null;
+					}
+				}
+			}
+		}
+		// System.out.println("doublePoint的结果为：" + position);
+		ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position);
+		this.setNode(anActionNode);
+	}
+
+	public void solveSingleComponent(NodeList childNodes, String action) {
+		// NodeList detailOpe =
+		// operation.getChildNodes();
+		String type2 = null;
+		String Text = null;
+		for (int h = 0; h < childNodes.getLength(); h++) {
+			if (childNodes.item(h).getNodeType() == Node.ELEMENT_NODE) {
+				NodeList ComponentList = childNodes.item(h).getChildNodes();
+
+				for (int k = 0; k < ComponentList.getLength(); k++) {
+					if (ComponentList.item(k).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+						// System.out.println("第"+(buttonNum+1)+"个操作的组件类型："+ComponentList.item(k).getNodeName());
+						// System.out.println("第"+(buttonNum+1)+"个操作的组件的text内容："+ComponentList.item(k).getTextContent());
+						if (ComponentList.item(k).getNodeName().equalsIgnoreCase("componentType")) {
+							type2 = ComponentList.item(k).getTextContent();
+							// System.out.println(type2);
+						}
+						if (ComponentList.item(k).getNodeName().equalsIgnoreCase("index")) {
+							Text = ComponentList.item(k).getTextContent();
+							// System.out.println(Text);
+						}
+					}
+				}
+			}
+		}
+		ActionNode anActionNode = null;
+		if (action.equalsIgnoreCase("click")) {
+			anActionNode = new ActionNode(null, Action.CLICK, type2, Text, null);
+		} else if (action.equalsIgnoreCase("LClick")) {
+			anActionNode = new ActionNode(null, Action.LCLICK, type2, Text, null);
+		}
+
+		this.setNode(anActionNode);
+	}
+
+	// int buttonNum = 0;
+	public void solveMultiComponent(NodeList childNodes, String action) {
+		for (int h = 0; h < childNodes.getLength(); h++) {
+			System.out.println("11" + childNodes.getLength());
+			if (childNodes.item(h).getNodeType() == Node.ELEMENT_NODE) {
+				NodeList MultiComponentList = childNodes.item(h).getChildNodes();
+				System.out.println("22" + MultiComponentList.getLength());
+				for (int k = 0; k < MultiComponentList.getLength(); k++) {
+					String type2 = null;
+					String Text = null;
+					if (MultiComponentList.item(k).getNodeType() == Node.ELEMENT_NODE) {
+						// buttonNum++;
+						NodeList ComponentList = MultiComponentList.item(k).getChildNodes();
+
+						for (int m = 0; m < ComponentList.getLength(); m++) {
+							if (ComponentList.item(m).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+								// System.out.println("第"+(buttonNum)+"个操作的组件类型："+ComponentList.item(m).getNodeName());
+								// System.out.println("第"+(buttonNum)+"个操作的组件的text内容："+ComponentList.item(m).getTextContent());
+								if (ComponentList.item(m).getNodeName().equalsIgnoreCase("componentType")) {
+									type2 = ComponentList.item(m).getTextContent();
+									// System.out.println(type2);
+								}
+								if (ComponentList.item(m).getNodeName().equalsIgnoreCase("index")) {
+									Text = ComponentList.item(m).getTextContent();
+									// System.out.println(Text);
+								}
+							}
+						}
+						ActionNode anActionNode = null;
+						if (action.equalsIgnoreCase("click")) {
+							anActionNode = new ActionNode(null, Action.CLICK, type2, Text, null);
+						} else if (action.equalsIgnoreCase("longClick")) {
+							anActionNode = new ActionNode(null, Action.LCLICK, type2, Text, null);
+						}
+
+						this.setNode(anActionNode);
+					}
+				}
+			}
+		}
+	}
+
+	public void solveDragRange(NodeList childNodes, String action) {
+		for (int n = 0; n < childNodes.getLength(); n++) {
+			if (childNodes.item(n).getNodeType() == Node.ELEMENT_NODE) {
+				NodeList DragRange = childNodes.item(n).getChildNodes();
+				// 位置
+				String position1 = null;
+				String position2 = null;
+				for (int k = 0; k < DragRange.getLength(); k++) {
+					if (DragRange.item(k).getNodeType() == Node.ELEMENT_NODE) {// singlePoint和doublePoint子节点
+						String ChildNodeName = DragRange.item(k).getNodeName();
+						// System.out.println("当前子节点名字为（第一层子节点）：" +
+						// ChildNodeName);
+
+						if (ChildNodeName.equalsIgnoreCase("singlePoint")) {// singlePoint子节点
+							// System.out.println("----当前处理拖动的singlePoint----");
+							NodeList singleNode = DragRange.item(k).getChildNodes();
+							for (int l = 0; l < singleNode.getLength(); l++) {
+								if (singleNode.item(l).getNodeType() == Node.ELEMENT_NODE) {
+									String pos = singleNode.item(l).getTextContent();
+									// System.out.println("点坐标为：" + pos);
+									if (position1 == null) {
+										position1 = pos;
+										position1 += "|";
+									} else {
+										position1 += pos;
+									}
+								}
+							}
+							// System.out.println("SinglePoint的值为：" +
+							// position1);
+						} else { // doublePoint子节点
+							// System.out.println("----当前处理拖动的area----");
+							NodeList singleNodes = DragRange.item(k).getChildNodes();
+							for (int l = 0; l < singleNodes.getLength(); l++) { // 遍历doublePoint子节点
+								if (singleNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {// doublePoint子节点中的element(singlePoint)
+									// System.out.println(
+									// "area中的第一层子节点" +
+									// singleNodes.item(l).getNodeName());
+									NodeList pointNodes = singleNodes.item(l).getChildNodes();
+									String tempPosition = null;
+									for (int m = 0; m < pointNodes.getLength(); m++) {
+										if (pointNodes.item(m).getNodeType() == Node.ELEMENT_NODE) {// pointX/Y节点
+											// System.out.println(
+											// "area中的第二层子节点" +
+											// pointNodes.item(m).getNodeName());
+											String pos = pointNodes.item(m).getTextContent();
+											// System.out.println("点坐标为：" +
+											// pos);
+											if (tempPosition == null) {
+												tempPosition = pos;
+												tempPosition += "|";
+											} else {
+												tempPosition += pos;
+												// tempPosition
+												// += "#";
+											}
+										}
+									}
+									if (position2 == null) {
+										position2 = tempPosition;
+										position2 += "#";
+									} else {
+										position2 += tempPosition;
+									}
+									tempPosition = null;
+								}
+							}
+						}
+					}
+				}
+				position1 = position1 + "#" + position2;
+				System.out.println("拖动操作的最后坐标为：" + position1);
+				ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position1);
+				this.setNode(anActionNode);
+			}
+		}
+
+	}
+
+	public void solveOracle(String type, String action, NodeList childNodes) {
+		// System.out.println("这是一个Oracle哦！！");
+		if (type.equalsIgnoreCase("SingleComponentResult")) {
+			String theType = null;
+			String theComponent = null;
+			String thePos = null;
+			for (int l = 0; l < childNodes.getLength(); l++) {
+				if (childNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {
+					// System.out.println(childNodes.item(l).getNodeName());
+					NodeList singleElement = childNodes.item(l).getChildNodes();
+					for (int m = 0; m < singleElement.getLength(); m++) {
+						if (singleElement.item(m).getNodeType() == Node.ELEMENT_NODE) {
+							String NowString = singleElement.item(m).getNodeName();
+							// System.out.println("现在的子节点名字："
+							// + NowString);
+							if (NowString.equalsIgnoreCase("index")) {
+								theType = singleElement.item(m).getTextContent();
+								// System.out.println(theType);
+							} else if (NowString.equalsIgnoreCase("resultType")) {
+								theType += "|" + singleElement.item(m).getTextContent();
+								// System.out.println(theType);
+							} else if (NowString.equalsIgnoreCase("componentType")) {
+								theComponent = singleElement.item(m).getTextContent();
+								// System.out.println(theComponent);
+							} else if (NowString.equalsIgnoreCase("expect")) {
+								thePos = singleElement.item(m).getTextContent();
+								// System.out.println(thePos);
+							}
+						}
+					}
+				}
+			}
+			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType, theComponent, thePos);
+			this.setNode(anActionNode);
+		} else if (type.equalsIgnoreCase("OrOperation")) {
+			System.out.println("--------------开始遍历与或非操作--------------");
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {// or的根节点
+					String opeName = childNodes.item(i).getNodeName();
+					NodeList childList = childNodes.item(i).getChildNodes(); // or的全部子节点
+					this.solveAndOr(opeName, childList);
+
+				}
+			}
+			OpeFstAndOr = true;
+			System.out.println("--------------结束遍历与或非操作--------------");
+		}
+	}
+
+	public void solveAndOr(String OpeName, NodeList childList) {
+		if (OpeName.equalsIgnoreCase("singleComponent")) {
+			
+		} else {
+			for (int i = 0; i < childList.getLength(); i++) {
+				if (childList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+					String Operation = childList.item(i).getNodeName();
+					if (Operation.equalsIgnoreCase("singleComponent")) {
+						String theType = null;
+						String theComponent = null;
+						String thePos = null;
+
+						NodeList singleElement = childList.item(i).getChildNodes();
+						for (int m = 0; m < singleElement.getLength(); m++) {
+							if (singleElement.item(m).getNodeType() == Node.ELEMENT_NODE) {
+								String NowString = singleElement.item(m).getNodeName();
+								// System.out.println("现在的子节点名字："
+								// + NowString);
+								if (NowString.equalsIgnoreCase("index")) {
+									theType = singleElement.item(m).getTextContent();
+									// System.out.println(theType);
+								} else if (NowString.equalsIgnoreCase("resultType")) {
+									theType += "|" + singleElement.item(m).getTextContent();
+									// System.out.println(theType);
+								} else if (NowString.equalsIgnoreCase("componentType")) {
+									theComponent = singleElement.item(m).getTextContent();
+									// System.out.println(theComponent);
+								} else if (NowString.equalsIgnoreCase("expect")) {
+									thePos = singleElement.item(m).getTextContent();
+									// System.out.println(thePos);
+								}
+							}
+						}
+						// 创建Action
+						if (OpeFstAndOr) {
+							System.out.println("与或非操作之"+thePos);
+							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType,
+									theComponent, thePos);
+							this.setNode(anActionNode);
+							OpeFstAndOr = false;
+						}else {
+							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
+							System.out.println("与或非操作之"+thePos);
+							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), theType,
+									theComponent, thePos);
+							this.setNode(anActionNode);
+						}
+					} else {
+						NodeList nextList = childList.item(i).getChildNodes(); // 下一个与或非的全部子节点
+						this.solveAndOr(Operation, nextList);
+					}
+				}
+			}
+		}
+	}
 
 	public void setNode(ActionNode actionNode) {
 		// 路径链表 的第一个
@@ -323,9 +478,10 @@ public class XmlAnalyse {
 			isFirst = false;
 			AllPath.add(actionNode);
 			NowNode = actionNode;
-		}
-		// 不是第一个，把上一个node连接到当前的node
-		else {
+		} else {// 不是第一个，把上一个node连接到当前的node
+			if (actionNode == null) {
+				System.out.println("操死你王栋");
+			}
 			NowNode.setNext(actionNode);
 			NowNode = actionNode;
 		}
