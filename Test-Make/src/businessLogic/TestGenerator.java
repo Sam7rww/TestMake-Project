@@ -1,7 +1,8 @@
 package businessLogic;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import java.io.File;
+import java.io.FileInputStream;
+
 import Explain.Action;
 import Node.ActionNode;
 
@@ -18,6 +19,9 @@ public class TestGenerator {
 	public String testApplicationPackageName = "";
 	public String MainActivityName = "MainMenu";
 	public String TestCaseClassName = "ScriptTest";
+
+	//保存截图文件的路径
+	public String picPath = ".\\\\Script\\\\pic";
 
 	boolean is_drag = false;
 
@@ -36,7 +40,7 @@ public class TestGenerator {
 	 */
 	public String generatorTestCore(ActionNode actionNode) {
 		String ans = "";
-		
+
 		switch (actionNode.getAction()) {
 		case CLICK:
 			ans += "// Click-TestAction-In-TestState\n";
@@ -81,6 +85,10 @@ public class TestGenerator {
 
 			is_drag = true;
 
+			break;
+		case TEXT:
+			ans += "// EnterText-TestAction-In-TestState\n";
+			ans += "solo.enterText("+actionNode.getComponentid()+",\""+actionNode.getPosition()+"\");\n\n";
 			break;
 		default:
 
@@ -146,11 +154,17 @@ public class TestGenerator {
 			String indexAndType[] = actionNode.getType().split("\\|");
 			if (indexAndType[1].equals("IMAGE")) {
 				ans += "// Assert-Image\n";
-				ans += "solo.takeScreenshot(\"\");\n";
-				ans += "Bitmap bitmap = BitmapFactory.decodeStream();";
-				int color = bitmap.getPixel(1, 2);
-				int a = 10;
-				int b = a<<24;
+				ans += "solo.takeScreenshot(\"" + picPath + "\");\n";
+				ans += "FileInputStream fis = new FileInputStream(new File(\""
+						+ picPath + ".jpg\"));\n";
+				ans += "Bitmap bitmap = BitmapFactory.decodeStream(fis);\n";
+				String position = actionNode.getPosition();
+				String x = position.split("\\|")[0];
+				String y = position.split("\\|")[1];
+				ans += "int color = bitmap.getPixel(" + x + "," + y + ");\n";
+				ans += "boolean test" + i + " = (color+\"\").equals(\""
+						+ actionNode.getComponentid() + "\");\n\n";
+
 			} else if (indexAndType[1].equals("TEXT")) {
 				ans += "// Assert-Text\n";
 				ans += "boolean test" + i + " = solo.searchText(\""
@@ -162,10 +176,10 @@ public class TestGenerator {
 			}
 			if (actionNode.getAction() == Action.OR) {
 				ans += testResultName + " = " + testResultName + "||" + "test"
-						+ i + ";\n";
+						+ i + ";\n\n";
 			} else if (actionNode.getAction() == Action.AND) {
 				ans += testResultName + " = " + testResultName + "&&" + "test"
-						+ i + ";\n";
+						+ i + ";\n\n";
 			}
 			i++;
 			actionNode = actionNode.getNext();
