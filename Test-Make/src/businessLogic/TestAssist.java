@@ -82,6 +82,10 @@ public class TestAssist {
 			File fi = new File(storePath + TestCaseClassName + s + ".java");
 			if (!(fi.exists())) {
 				try {
+			        if (!fi.getParentFile().exists()) {  
+			            if (!fi.getParentFile().mkdirs()) {  
+			            }  
+			        }  
 					fi.createNewFile();
 				} catch (IOException e) {
 					System.out.println(storePath + TestCaseClassName + s
