@@ -9,7 +9,8 @@ import Node.ActionNode;
 
 public class TestAssist {
 	public String storePath = ".\\Script\\";
-//	public String storePath = "/Users/sam/TestMake-Project/Test-Make/Script/";
+	// public String storePath =
+	// "/Users/sam/TestMake-Project/Test-Make/Script/";
 	public String TestCaseClassName = "";
 
 	// num表示生成脚本的个数
@@ -19,7 +20,6 @@ public class TestAssist {
 	int scriptNum = 0;
 
 	boolean is_drag;
-
 
 	/**
 	 * @param actionNode
@@ -43,8 +43,9 @@ public class TestAssist {
 						float x = (float) (Math.random() * (x2 - x1) + x1);
 						float y = (float) (Math.random() * (y2 - y1) + y1);
 						String temp = path[0] + "#" + x + "|" + y + "|";
-						ActionNode tempNode = new ActionNode(actionNode.getNext(),
-								actionNode.getAction(), actionNode.getType(),
+						ActionNode tempNode = new ActionNode(
+								actionNode.getNext(), actionNode.getAction(),
+								actionNode.getType(),
 								actionNode.getComponentid(), temp);
 						String ans = res
 								+ testGenerator.generatorTestCore(tempNode);
@@ -66,7 +67,7 @@ public class TestAssist {
 			res += testGenerator.testOracleSequence(actionNode);
 			res += "}\n";
 			scriptNum++;
-			StoreTestCase(res, fileName+scriptNum);
+			StoreTestCase(res, fileName + scriptNum);
 		}
 	}
 
@@ -89,7 +90,7 @@ public class TestAssist {
 			FileWriter fw;
 			try {
 				fw = new FileWriter(fi); // [覆盖原文件]
-				// fw = new FileWriter(fi,true); // [不覆盖原文件]
+				// fw = new FileWriter(fi, true); // [不覆盖原文件]
 				fw.write(mid);
 				fw.flush();
 				fw.close();

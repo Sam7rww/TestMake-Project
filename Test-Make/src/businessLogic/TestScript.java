@@ -23,7 +23,7 @@ public class TestScript {
 		a7.setNext(a8);
 		
 		String result = new TestGenerator().generatorCompleteTest();
-		new TestAssist().generator(a2, result,"");
+//		new TestAssist().generator(a2, result,"");
 		new TestAssist().generator(a2, result, "fileName");
 		System.out.println("heheda");
 	}

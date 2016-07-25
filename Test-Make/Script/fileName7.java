@@ -31,10 +31,10 @@ solo.clickOnScreen((float)231.9, (float)9);
 solo.clickOnTextView("text1");
 
 // Drag-TestAction-In-TestState
-solo.drag((float)1.1, (float)95.29983,(float)2.2,(float)363.64307,5);
+solo.drag((float)1.1, (float)95.46749,(float)2.2,(float)352.82986,5);
 
 // Drag-TestAction-In-TestState
-solo.drag((float)11.1, (float)16.877317,(float)12.2,(float)24.392366,5);
+solo.drag((float)11.1, (float)18.075975,(float)12.2,(float)22.041245,5);
 
 // Click-TestAction-In-TestState
 solo.clickOnMenuItem("Item1");

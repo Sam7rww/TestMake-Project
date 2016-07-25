@@ -1,5 +1,7 @@
 package businessLogic;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import Explain.Action;
 import Node.ActionNode;
 
@@ -34,6 +36,7 @@ public class TestGenerator {
 	 */
 	public String generatorTestCore(ActionNode actionNode) {
 		String ans = "";
+		
 		switch (actionNode.getAction()) {
 		case CLICK:
 			ans += "// Click-TestAction-In-TestState\n";
@@ -136,10 +139,6 @@ public class TestGenerator {
 		String ans = "";
 
 		ans += "solo.sleep(1000);\n\n";
-		// 会报错
-		// ans += "ScreenShot ss = new ScreenShot(\"" + TestCaseClassName
-		// + "_sc\");\n\n";
-		// ans += "Bitmap bitmap = ss.getScreenShot();\n\n";
 
 		int i = 1;
 		while (actionNode != null) {
@@ -147,8 +146,11 @@ public class TestGenerator {
 			String indexAndType[] = actionNode.getType().split("\\|");
 			if (indexAndType[1].equals("IMAGE")) {
 				ans += "// Assert-Image\n";
-				// ans += "boolean " + testResultName
-				// + " = (bitmap.getPixel(307, 436) == -1);\n\n";
+				ans += "solo.takeScreenshot(\"\");\n";
+				ans += "Bitmap bitmap = BitmapFactory.decodeStream();";
+				int color = bitmap.getPixel(1, 2);
+				int a = 10;
+				int b = a<<24;
 			} else if (indexAndType[1].equals("TEXT")) {
 				ans += "// Assert-Text\n";
 				ans += "boolean test" + i + " = solo.searchText(\""
