@@ -28,25 +28,7 @@ public void testOnClick()
 solo.clickOnButton("Training");
 
 // Click-TestAction-In-TestState
-solo.clickOnButton("re");
-
-// Click-TestAction-In-TestState
-solo.clickOnButton("si");
-
-// Click-TestAction-In-TestState
-solo.clickOnnull("null");
-
-// Click-TestAction-In-TestState
-solo.clickOnButton("sol");
-
-// Click-TestAction-In-TestState
 solo.clickOnButton("do");
-
-// Click-TestAction-In-TestState
-solo.clickOnButton("fa");
-
-// Click-TestAction-In-TestState
-solo.clickOnButton("la");
 
 // Click-TestAction-In-TestState
 solo.clickOnButton("End Game");
@@ -54,8 +36,22 @@ solo.clickOnButton("End Game");
 solo.sleep(1000);
 
 // Assert-Text
-boolean test_result = solo.searchText("correct");
+boolean test1 = solo.searchText("fail");
 
+boolean test_result;
+test_result = test1;
+// Assert-Text
+boolean test2 = solo.searchText("correct");
+
+test_result = test_result||test2;
+// Assert-Text
+boolean test3 = solo.searchText("1");
+
+test_result = test_result&&test3;
+// Assert-Text
+boolean test4 = solo.searchText("0");
+
+test_result = test_result||test4;
 assertTrue("Test: Failed.", test_result);
 }
 /*--------------------------------*/

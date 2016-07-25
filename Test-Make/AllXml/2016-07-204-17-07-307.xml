@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+	<path>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>Training</index>
+				<componentType>Button</componentType>
+			</Component>
+		</operation>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>mi</index>
+				<componentType>Button</componentType>
+			</Component>
+		</operation>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>End Game</index>
+				<componentType>Button</componentType>
+			</Component>
+		</operation>
+		<oracle type="AndOperation">
+			<and>
+				<pixelsResult>
+					<r>10</r>
+					<g>6</g>
+					<b>3</b>
+					<Xray>515.64</Xray>
+					<Yray>706.4</Yray>
+				</pixelsResult>
+				<singleComponent>
+					<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+					<resultType>TEXT</resultType>
+					<componentType>TextView</componentType>
+					<expect>0</expect>
+				</singleComponent>
+			</and>
+		</oracle>
+	</path>
+</paths>

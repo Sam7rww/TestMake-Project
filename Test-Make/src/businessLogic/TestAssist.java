@@ -8,8 +8,8 @@ import Explain.Action;
 import Node.ActionNode;
 
 public class TestAssist {
-	public String storePath = ".\\Script\\";
-//	public String storePath = "/Users/sam/TestMake-Project/Test-Make/Script/";
+//	public String storePath = ".\\Script\\";
+	public String storePath = "/Users/sam/TestMake-Project/Test-Make/Script/";
 	public String TestCaseClassName = "";
 
 	// num表示生成脚本的个数

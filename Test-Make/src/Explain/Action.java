@@ -4,7 +4,7 @@ package Explain;
  * Created by Administrator on 2016/7/8.
  */
 public enum Action {
-    DRAG,CLICK,DCLICK,LCLICK,ORACLE,AND,OR,NOT;
+    DRAG,CLICK,DCLICK,LCLICK,ORACLE,AND,OR,NOT,TEXT;
     
     public static Action valueOf(int cur_action) {
 		// TODO Auto-generated method stub
@@ -38,6 +38,8 @@ public enum Action {
 			return Action.OR;
 		case "not":
 			return Action.NOT;
+		case "input":
+			return Action.TEXT;
 		default:
 			return null;
 		}
