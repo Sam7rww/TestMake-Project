@@ -6,7 +6,7 @@ import Node.ActionNode;
 public class TestScript {
 	public static void main(String[] args){
 		ActionNode a1 = new ActionNode(null, Action.CLICK, "MenuItem", "Item1", "23.4|11.1");
-		ActionNode a2 = new ActionNode(null, Action.CLICK, null, null, "231.9|9");
+		ActionNode a2 = new ActionNode(null, Action.TEXT, null, "1", "sb wang dong");
 		ActionNode a3 = new ActionNode(null, Action.CLICK, "TextView", "text1", "2.3|4.3");
 		ActionNode a4 = new ActionNode(null, Action.DRAG, null, null, "1.1|2.2#3.3|4.4#123|456");
 		ActionNode a5 = new ActionNode(null, Action.DRAG, null, null, "11.1|12.2#13.3|14.4#23.5|26.6");

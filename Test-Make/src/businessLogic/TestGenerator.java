@@ -20,6 +20,7 @@ public class TestGenerator {
 	public String MainActivityName = "MainMenu";
 	public String TestCaseClassName = "ScriptTest";
 
+	//保存截图文件的路径
 	public String picPath = ".\\\\Script\\\\pic";
 
 	boolean is_drag = false;
@@ -84,6 +85,10 @@ public class TestGenerator {
 
 			is_drag = true;
 
+			break;
+		case TEXT:
+			ans += "// EnterText-TestAction-In-TestState\n";
+			ans += "solo.enterText("+actionNode.getComponentid()+",\""+actionNode.getPosition()+"\");\n\n";
 			break;
 		default:
 
