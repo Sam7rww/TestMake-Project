@@ -5,6 +5,7 @@ import javax.xml.soap.Node;
 import org.w3c.dom.NodeList;
 
 import Explain.Action;
+import Explain.XmlAnalyse;
 import Node.ActionNode;
 
 public class ComponentAnalysis {
@@ -44,7 +45,7 @@ public class ComponentAnalysis {
 			anActionNode = new ActionNode(null, Action.LCLICK, type2, Text, null);
 		}
 
-		this.setNode(anActionNode);
+		XmlAnalyse.setNode(anActionNode);
 	}
 
 	// int buttonNum = 0;
@@ -85,7 +86,7 @@ public class ComponentAnalysis {
 							anActionNode = new ActionNode(null, Action.LCLICK, type2, Text, null);
 						}
 
-						this.setNode(anActionNode);
+						XmlAnalyse.setNode(anActionNode);
 					}
 				}
 			}

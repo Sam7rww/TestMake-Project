@@ -1,5 +1,6 @@
 package Explain;
 
+import java.awt.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +17,27 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import Explain.DetailAnalysis.ComponentAnalysis;
+import Explain.DetailAnalysis.DragAnalysis;
+import Explain.DetailAnalysis.EnterText;
+import Explain.DetailAnalysis.Oracle;
+import Explain.DetailAnalysis.PointAnalysis;
 import Node.ActionNode;
 
 public class XmlAnalyse {
 	/*
 	 * 操作列表
 	 */
-	private List<ActionNode> AllPath = new ArrayList<ActionNode>();
+	private static List<ActionNode> AllPath = new ArrayList<ActionNode>();
 
-	private ActionNode NowNode = null;
+	private static ActionNode NowNode = null;
 
-	private boolean isFirst = true;
+	private static boolean isFirst = true;
 
-	private boolean OpeFstAndOr = true;
+	private static boolean OpeFstAndOr = true;
 
 	public List<ActionNode> GetAction() {
+		AllPath.clear();
 		// 创建一个documentBuildFactory的对象
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -84,28 +91,42 @@ public class XmlAnalyse {
 						// "个子节点");
 
 						if (Opename.equalsIgnoreCase("oracle")) {
-							this.solveOracle(type, action, childNodes);
+							Oracle oracle = new Oracle();
+							oracle.solveOracle(type, action, childNodes);
+//							this.solveOracle(type, action, childNodes);
 
 						} else {// 路径中的Operation
 							/*
 							 * 针对不同的type属性进行不同的解析过程
 							 */
 							if (type.equalsIgnoreCase("Component")) {
-								this.solveSingleComponent(childNodes, action);
+								ComponentAnalysis componentAnalysis = new ComponentAnalysis();
+								componentAnalysis.solveSingleComponent(childNodes, action);
+//								this.solveSingleComponent(childNodes, action);
 
 							} else if (type.contains("MultiComponent")) {
-								this.solveMultiComponent(childNodes, action);
+								ComponentAnalysis componentAnalysis = new ComponentAnalysis();
+								componentAnalysis.solveMultiComponent(childNodes, action);
+//								this.solveMultiComponent(childNodes, action);
 
 							} else if (type.equalsIgnoreCase("SinglePoint")) {
-								this.solveSinglePoint(childNodes, action);
+								PointAnalysis pointAnalysis = new PointAnalysis();
+								pointAnalysis.solveSinglePoint(childNodes, action);
+//								this.solveSinglePoint(childNodes, action);
 
 							} else if (type.equalsIgnoreCase("DoublePoint")) {
-								this.solveDoublePoint(childNodes, action);
+								PointAnalysis pointAnalysis = new PointAnalysis();
+								pointAnalysis.solveDoublePoint(childNodes, action);;
+//								this.solveDoublePoint(childNodes, action);
 
 							} else if (type.equalsIgnoreCase("DragRange")) {
-								this.solveDragRange(childNodes, action);
+								DragAnalysis dragAnalysis = new DragAnalysis();
+								dragAnalysis.solveDragRange(childNodes, action);
+//								this.solveDragRange(childNodes, action);
 							}else if (type.equalsIgnoreCase("TextComponent")) {
-								this.solveTextEnter(childNodes,action);
+								EnterText enterText = new EnterText();
+								enterText.solveTextEnter(childNodes, action);
+//								this.solveTextEnter(childNodes,action);
 							}
 
 						} // element型子节点（operation）
@@ -591,7 +612,7 @@ public class XmlAnalyse {
 		}
 	}
 
-	public void setNode(ActionNode actionNode) {
+	public static void setNode(ActionNode actionNode) {
 		// 路径链表 的第一个
 		if (isFirst) {
 			isFirst = false;

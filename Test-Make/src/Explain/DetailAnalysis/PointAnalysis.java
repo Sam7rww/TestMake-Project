@@ -5,6 +5,7 @@ import javax.xml.soap.Node;
 import org.w3c.dom.NodeList;
 
 import Explain.Action;
+import Explain.XmlAnalyse;
 import Node.ActionNode;
 
 public class PointAnalysis {
@@ -36,7 +37,7 @@ public class PointAnalysis {
 		} else if (action.equalsIgnoreCase("LClick")) {
 			anActionNode = new ActionNode(null, Action.LCLICK, null, null, position);
 		}
-		this.setNode(anActionNode);
+		XmlAnalyse.setNode(anActionNode);
 	}
 
 	public void solveDoublePoint(NodeList childNodes, String action) {
@@ -79,6 +80,6 @@ public class PointAnalysis {
 		}
 		// System.out.println("doublePoint的结果为：" + position);
 		ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position);
-		this.setNode(anActionNode);
+		XmlAnalyse.setNode(anActionNode);
 	}
 }

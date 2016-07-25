@@ -5,6 +5,7 @@ import javax.xml.soap.Node;
 import org.w3c.dom.NodeList;
 
 import Explain.Action;
+import Explain.XmlAnalyse;
 import Node.ActionNode;
 
 public class Oracle {
@@ -44,7 +45,7 @@ public class Oracle {
 				}
 			}
 			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType, theComponent, thePos);
-			this.setNode(anActionNode);
+			XmlAnalyse.setNode(anActionNode);
 		}else if (type.equalsIgnoreCase("PixelsResult")) {
 			String theRGB = null;
 			String position = null;
@@ -69,7 +70,7 @@ public class Oracle {
 			System.out.println("坐标为"+position);
 			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
 					theRGB, position);
-			this.setNode(anActionNode);
+			XmlAnalyse.setNode(anActionNode);
 		} else if (type.equalsIgnoreCase("OrOperation")) {
 //			System.out.println("--------------开始遍历与或非操作--------------");
 			for (int i = 0; i < childNodes.getLength(); i++) {
@@ -135,14 +136,14 @@ public class Oracle {
 //							System.out.println("与或非操作之"+thePos);
 							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType,
 									theComponent, thePos);
-							this.setNode(anActionNode);
+							XmlAnalyse.setNode(anActionNode);
 							OpeFstAndOr = false;
 						}else {
 //							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
 //							System.out.println("与或非操作之"+thePos);
 							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), theType,
 									theComponent, thePos);
-							this.setNode(anActionNode);
+							XmlAnalyse.setNode(anActionNode);
 						}
 					}else if (Operation.equalsIgnoreCase("pixelsResult")) {
 						String theRGB = null;
@@ -173,14 +174,14 @@ public class Oracle {
 							System.out.println("坐标为"+position);
 							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
 									theRGB, position);
-							this.setNode(anActionNode);
+							XmlAnalyse.setNode(anActionNode);
 							OpeFstAndOr = false;
 						}else {
 //							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
 //							System.out.println("与或非操作之"+thePos);
 							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), "IMAGE",
 									theRGB, position);
-							this.setNode(anActionNode);
+							XmlAnalyse.setNode(anActionNode);
 						}
 						
 					} 

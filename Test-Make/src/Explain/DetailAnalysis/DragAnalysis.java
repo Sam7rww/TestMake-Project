@@ -5,6 +5,7 @@ import javax.xml.soap.Node;
 import org.w3c.dom.NodeList;
 
 import Explain.Action;
+import Explain.XmlAnalyse;
 import Node.ActionNode;
 
 public class DragAnalysis {
@@ -82,7 +83,7 @@ public class DragAnalysis {
 				position1 = position1 + "#" + position2;
 				System.out.println("拖动操作的最后坐标为：" + position1);
 				ActionNode anActionNode = new ActionNode(null, Action.DRAG, null, null, position1);
-				this.setNode(anActionNode);
+				XmlAnalyse.setNode(anActionNode);
 			}
 		}
 
