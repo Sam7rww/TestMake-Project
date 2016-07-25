@@ -21,7 +21,7 @@ public class TestGenerator {
 	public String TestCaseClassName = "ScriptTest";
 
 	//保存截图文件的路径
-	public String picPath = ".\\\\Script\\\\pic";
+	public String picPath = "./Script/pic";
 
 	boolean is_drag = false;
 
