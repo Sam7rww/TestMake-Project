@@ -43,7 +43,7 @@ public class XmlAnalyse {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
 			Document document = db
-					.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/2016-07-202-10-07-430.xml");
+					.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/2016-07-207-09-07-609.xml");
 			// 获取所有path节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
@@ -104,6 +104,8 @@ public class XmlAnalyse {
 
 							} else if (type.equalsIgnoreCase("DragRange")) {
 								this.solveDragRange(childNodes, action);
+							}else if (type.equalsIgnoreCase("TextComponent")) {
+								this.solveTextEnter(childNodes,action);
 							}
 
 						} // element型子节点（operation）
@@ -138,6 +140,40 @@ public class XmlAnalyse {
 	//
 	// return null;
 	// }
+	public void solveTextEnter(NodeList childNodes, String action){
+		String type = null;
+		String ComName = null;
+		String EnterText = null;
+		for(int i=0;i<childNodes.getLength();i++){
+			if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
+				System.out.println("当前结点为"+childNodes.item(i).getNodeName());
+				NodeList textList = childNodes.item(i).getChildNodes();
+				for(int j=0;j<textList.getLength();j++){
+					if (textList.item(j).getNodeType() == Node.ELEMENT_NODE) {
+						String NowName = textList.item(j).getNodeName();
+						System.out.println("当前结点为"+NowName);
+						if (NowName.equalsIgnoreCase("index")) {
+							ComName = textList.item(j).getTextContent();
+						}else if (NowName.equalsIgnoreCase("componentType")) {
+							type = textList.item(j).getTextContent();
+						}else if (NowName.equalsIgnoreCase("input")) {
+							EnterText = textList.item(j).getTextContent();
+						}
+					}
+				}
+			}
+		}
+		if (type.equalsIgnoreCase("EditText")) {
+			type = "Text";
+		}
+		System.out.println("当前操作为："+"类型"+type+"组件名字"+ComName+"输入文本"+EnterText);
+		ActionNode anActionNode = null;
+		anActionNode = new ActionNode(null, Action.TEXT, type, ComName, EnterText);
+
+		this.setNode(anActionNode);
+	}
+	
+	
 	public void solveSinglePoint(NodeList childNodes, String action) {
 		String position = null;
 		for (int k = 0; k < childNodes.getLength(); k++) {
@@ -236,6 +272,9 @@ public class XmlAnalyse {
 				}
 			}
 		}
+		if (type2.equalsIgnoreCase("TextView")) {
+			type2 = "Text";
+		}
 		ActionNode anActionNode = null;
 		if (action.equalsIgnoreCase("click")) {
 			anActionNode = new ActionNode(null, Action.CLICK, type2, Text, null);
@@ -273,6 +312,9 @@ public class XmlAnalyse {
 									// System.out.println(Text);
 								}
 							}
+						}
+						if(type2.equalsIgnoreCase("TextView")){
+							type2 = "Text";
 						}
 						ActionNode anActionNode = null;
 						if (action.equalsIgnoreCase("click")) {
@@ -402,7 +444,7 @@ public class XmlAnalyse {
 			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType, theComponent, thePos);
 			this.setNode(anActionNode);
 		} else if (type.equalsIgnoreCase("OrOperation")) {
-			System.out.println("--------------开始遍历与或非操作--------------");
+//			System.out.println("--------------开始遍历与或非操作--------------");
 			for (int i = 0; i < childNodes.getLength(); i++) {
 				if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {// or的根节点
 					String opeName = childNodes.item(i).getNodeName();
@@ -412,19 +454,19 @@ public class XmlAnalyse {
 				}
 			}
 			OpeFstAndOr = true;
-			System.out.println("--------------结束遍历与或非操作--------------");
+//			System.out.println("--------------结束遍历与或非操作--------------");
 		}else if (type.equalsIgnoreCase("AndOperation")) {
-			System.out.println("--------------开始遍历与或非操作--------------");
+//			System.out.println("--------------开始遍历与或非操作--------------");
 			for (int i = 0; i < childNodes.getLength(); i++) {
-				if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {// or的根节点
+				if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {// and的根节点
 					String opeName = childNodes.item(i).getNodeName();
-					NodeList childList = childNodes.item(i).getChildNodes(); // or的全部子节点
+					NodeList childList = childNodes.item(i).getChildNodes(); // and的全部子节点
 					this.solveAndOr(opeName, childList);
 
 				}
 			}
 			OpeFstAndOr = true;
-			System.out.println("--------------结束遍历与或非操作--------------");
+//			System.out.println("--------------结束遍历与或非操作--------------");
 		}
 	}
 
@@ -463,19 +505,57 @@ public class XmlAnalyse {
 						}
 						// 创建Action
 						if (OpeFstAndOr) {
-							System.out.println("与或非操作之"+thePos);
+//							System.out.println("与或非操作之"+thePos);
 							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType,
 									theComponent, thePos);
 							this.setNode(anActionNode);
 							OpeFstAndOr = false;
 						}else {
-							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
-							System.out.println("与或非操作之"+thePos);
+//							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
+//							System.out.println("与或非操作之"+thePos);
 							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), theType,
 									theComponent, thePos);
 							this.setNode(anActionNode);
 						}
-					} else {
+					}else if (Operation.equalsIgnoreCase("pixelsResult")) {
+						String theRGB = null;
+						String position = null;
+						NodeList pixelsElement = childList.item(i).getChildNodes();
+						for(int m=0;m<pixelsElement.getLength();m++){
+							if (pixelsElement.item(m).getNodeType() == Node.ELEMENT_NODE) {
+								String NodeString = pixelsElement.item(m).getNodeName();
+								System.out.println("当前节点名字为："+NodeString);
+								if (NodeString.equalsIgnoreCase("r")){
+									theRGB = pixelsElement.item(m).getTextContent()+"|";
+								}else if (NodeString.equalsIgnoreCase("g")) {
+									theRGB += pixelsElement.item(m).getTextContent()+"|";
+								}else if (NodeString.equalsIgnoreCase("b")) {
+									theRGB +=pixelsElement.item(m).getTextContent();
+								}else if (NodeString.equalsIgnoreCase("Xray")) {
+									position = pixelsElement.item(m).getTextContent()+"|";
+								}else if (NodeString.equalsIgnoreCase("Yray")) {
+									position += pixelsElement.item(m).getTextContent();
+								}
+							}
+						}
+						// 创建Action
+						if (OpeFstAndOr) {
+//							System.out.println("RGB为"+theRGB);
+//							System.out.println("坐标为"+position);
+							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
+									theRGB, position);
+							this.setNode(anActionNode);
+							OpeFstAndOr = false;
+						}else {
+//							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
+//							System.out.println("与或非操作之"+thePos);
+							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), "IMAGE",
+									theRGB, position);
+							this.setNode(anActionNode);
+						}
+						
+					} 
+					else {
 						NodeList nextList = childList.item(i).getChildNodes(); // 下一个与或非的全部子节点
 						this.solveAndOr(Operation, nextList);
 					}
