@@ -12,7 +12,7 @@ public class TestScript {
 		ActionNode a5 = new ActionNode(null, Action.DRAG, null, null, "11.1|12.2#13.3|14.4#23.5|26.6");
 		ActionNode a6 = new ActionNode(null, Action.ORACLE, "3|TEXT", "EditText", "Note 1 test");
 		ActionNode a7 = new ActionNode(null, Action.OR, "sth|TEXT", "EditText", "Note 2 test");
-		ActionNode a8 = new ActionNode(null, Action.AND, "2|TEXT", "EditText", "hehe");
+		ActionNode a8 = new ActionNode(null, Action.AND, "2|IMAGE", "124", "12|26");
 //		a1.setNext(a2);
 		a2.setNext(a3);
 		a3.setNext(a4);

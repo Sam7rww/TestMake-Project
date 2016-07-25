@@ -31,10 +31,10 @@ solo.clickOnScreen((float)231.9, (float)9);
 solo.clickOnTextView("text1");
 
 // Drag-TestAction-In-TestState
-solo.drag((float)1.1, (float)90.51225,(float)2.2,(float)393.4977,5);
+solo.drag((float)1.1, (float)87.58006,(float)2.2,(float)436.03287,5);
 
 // Drag-TestAction-In-TestState
-solo.drag((float)11.1, (float)18.038263,(float)12.2,(float)15.256126,5);
+solo.drag((float)11.1, (float)20.886284,(float)12.2,(float)23.391436,5);
 
 // Click-TestAction-In-TestState
 solo.clickOnMenuItem("Item1");
@@ -50,8 +50,12 @@ test_result = test1;
 boolean test2 = solo.searchText("Note 2 test");
 
 test_result = test_result||test2;
-// Assert-Text
-boolean test3 = solo.searchText("hehe");
+// Assert-Image
+solo.takeScreenshot(".\\Script\\pic");
+FileInputStream fis = new FileInputStream(new File(".\\Script\\pic.jpg"));
+Bitmap bitmap = BitmapFactory.decodeStream(fis);
+int color = bitmap.getPixel(12,26);
+boolean test3 = (color+"").equals("124");
 
 test_result = test_result&&test3;
 assertTrue("Test: Failed.", test_result);
