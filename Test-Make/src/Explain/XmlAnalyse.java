@@ -43,7 +43,7 @@ public class XmlAnalyse {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
 			Document document = db
-					.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/2016-07-207-09-07-609.xml");
+					.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(7).xml");
 			// 获取所有path节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
@@ -146,12 +146,12 @@ public class XmlAnalyse {
 		String EnterText = null;
 		for(int i=0;i<childNodes.getLength();i++){
 			if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
-				System.out.println("当前结点为"+childNodes.item(i).getNodeName());
+//				System.out.println("当前结点为"+childNodes.item(i).getNodeName());
 				NodeList textList = childNodes.item(i).getChildNodes();
 				for(int j=0;j<textList.getLength();j++){
 					if (textList.item(j).getNodeType() == Node.ELEMENT_NODE) {
 						String NowName = textList.item(j).getNodeName();
-						System.out.println("当前结点为"+NowName);
+//						System.out.println("当前结点为"+NowName);
 						if (NowName.equalsIgnoreCase("index")) {
 							ComName = textList.item(j).getTextContent();
 						}else if (NowName.equalsIgnoreCase("componentType")) {
@@ -443,6 +443,31 @@ public class XmlAnalyse {
 			}
 			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, theType, theComponent, thePos);
 			this.setNode(anActionNode);
+		}else if (type.equalsIgnoreCase("PixelsResult")) {
+			String theRGB = null;
+			String position = null;
+			for(int l=0;l<childNodes.getLength();l++){
+				if (childNodes.item(l).getNodeType() == Node.ELEMENT_NODE) {
+					NodeList singleElement = childNodes.item(l).getChildNodes();
+					for(int m=0;m<singleElement.getLength();m++){
+						if (singleElement.item(m).getNodeType() == Node.ELEMENT_NODE) {
+							String NodeString = singleElement.item(m).getNodeName();
+							if (NodeString.equalsIgnoreCase("color")) {
+								theRGB = singleElement.item(m).getTextContent();
+							}else if (NodeString.equalsIgnoreCase("Xray")) {
+								position = singleElement.item(m).getTextContent()+"|";
+							}else if (NodeString.equalsIgnoreCase("Yray")) {
+								position += singleElement.item(m).getTextContent();
+							}
+						}
+					}
+				}
+			}
+			System.out.println("RGB为"+theRGB);
+			System.out.println("坐标为"+position);
+			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
+					theRGB, position);
+			this.setNode(anActionNode);
 		} else if (type.equalsIgnoreCase("OrOperation")) {
 //			System.out.println("--------------开始遍历与或非操作--------------");
 			for (int i = 0; i < childNodes.getLength(); i++) {
@@ -531,6 +556,8 @@ public class XmlAnalyse {
 									theRGB += pixelsElement.item(m).getTextContent()+"|";
 								}else if (NodeString.equalsIgnoreCase("b")) {
 									theRGB +=pixelsElement.item(m).getTextContent();
+								}else if (NodeString.equalsIgnoreCase("color")) {
+									theRGB = pixelsElement.item(m).getTextContent();
 								}else if (NodeString.equalsIgnoreCase("Xray")) {
 									position = pixelsElement.item(m).getTextContent()+"|";
 								}else if (NodeString.equalsIgnoreCase("Yray")) {
@@ -540,8 +567,8 @@ public class XmlAnalyse {
 						}
 						// 创建Action
 						if (OpeFstAndOr) {
-//							System.out.println("RGB为"+theRGB);
-//							System.out.println("坐标为"+position);
+							System.out.println("RGB为"+theRGB);
+							System.out.println("坐标为"+position);
 							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
 									theRGB, position);
 							this.setNode(anActionNode);

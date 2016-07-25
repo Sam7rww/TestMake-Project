@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+	<path>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>Training</index>
+				<componentType>Button</componentType>
+			</Component>
+		</operation>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>si</index>
+				<componentType>Button</componentType>
+			</Component>
+		</operation>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>End Game</index>
+				<componentType>Button</componentType>
+			</Component>
+		</operation>
+		<oracle type="PixelsResult">
+			<pixelsResult>
+				<color>-16777216</color>
+				<Xray>434.5</Xray>
+				<Yray>715.41</Yray>
+			</pixelsResult>
+		</oracle>
+	</path>
+</paths>
