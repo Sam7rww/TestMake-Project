@@ -165,12 +165,18 @@ public class TestGenerator {
 				ans += "//获得SD卡对应的存储目录\n";
 				ans += "File sdCardDir = Environment.getExternalStorageDirectory();\n";
 				ans += "//获取指定文件对应的输入流\n";
-				ans += "FileInputStream fis = new FileInputStream(sdCardDir.getCanonicalPath()+\"" + picName+"\");\n";
+				ans += "FileInputStream fis = new FileInputStream(sdCardDir.getCanonicalPath()+" +"/Robotium-ScreenShots/\""+ picName+"\");\n";
 				ans += "}\n} catch (Exception e) {\ne.printStackTrace();\n}\n";
 				ans += "Bitmap bitmap = BitmapFactory.decodeStream(fis);\n";
 				String position = actionNode.getPosition();
 				String x = position.split("\\|")[0];
 				String y = position.split("\\|")[1];
+				if(x.contains(".")){
+					x = x.split(".")[0];
+				}
+				if(y.contains(".")){
+					y = y.split(".")[0];
+				}
 				ans += "int color = bitmap.getPixel(" + x + "," + y + ");\n";
 				ans += "boolean test" + i + " = (color+\"\").equals(\""
 						+ actionNode.getComponentid() + "\");\n\n";
