@@ -152,6 +152,7 @@ public class TestGenerator {
 		while (actionNode != null) {
 
 			String indexAndType[] = actionNode.getType().split("\\|");
+			System.out.println("-----------------"+actionNode.getType());
 			if (indexAndType[1].equals("IMAGE")) {
 				ans += "// Assert-Image\n";
 				ans += "solo.takeScreenshot(\"" + picPath + "\");\n";

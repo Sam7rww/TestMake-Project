@@ -68,7 +68,7 @@ public class Oracle {
 			}
 			System.out.println("RGB为"+theRGB);
 			System.out.println("坐标为"+position);
-			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
+			ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "0|IMAGE",
 					theRGB, position);
 			XmlAnalyse.setNode(anActionNode);
 		} else if (type.equalsIgnoreCase("OrOperation")) {
@@ -172,14 +172,14 @@ public class Oracle {
 						if (OpeFstAndOr) {
 							System.out.println("RGB为"+theRGB);
 							System.out.println("坐标为"+position);
-							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "IMAGE",
+							ActionNode anActionNode = new ActionNode(null, Action.ORACLE, "0|IMAGE",
 									theRGB, position);
 							XmlAnalyse.setNode(anActionNode);
 							OpeFstAndOr = false;
 						}else {
 //							System.out.println("与或非操作"+";当前操作为："+Action.ToString(OpeName));
 //							System.out.println("与或非操作之"+thePos);
-							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), "IMAGE",
+							ActionNode anActionNode = new ActionNode(null, Action.ToString(OpeName), "0|IMAGE",
 									theRGB, position);
 							XmlAnalyse.setNode(anActionNode);
 						}

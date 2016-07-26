@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+	<path>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>Application main options.</index>
+				<componentType>TextView</componentType>
+				<message></message>
+			</Component>
+		</operation>
+		<oracle type="SingleComponentResult">
+			<singleComponent>
+				<index></index>
+				<message></message>
+				<resultType>TEXT</resultType>
+				<componentType>ImageView</componentType>
+				<expect>sanity</expect>
+			</singleComponent>
+		</oracle>
+	</path>
+</paths>
