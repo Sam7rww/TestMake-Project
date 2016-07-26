@@ -166,6 +166,7 @@ public class TestGenerator {
 				ans += "File sdCardDir = Environment.getExternalStorageDirectory();\n";
 				ans += "//获取指定文件对应的输入流\n";
 				ans += "FileInputStream fis = new FileInputStream(sdCardDir.getCanonicalPath()" + picName+");\n";
+				ans += "}\n} catch (Exception e) {\ne.printStackTrace();\n}\n";
 				ans += "Bitmap bitmap = BitmapFactory.decodeStream(fis);\n";
 				String position = actionNode.getPosition();
 				String x = position.split("\\|")[0];
