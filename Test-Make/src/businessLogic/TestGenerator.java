@@ -21,7 +21,7 @@ public class TestGenerator {
 	public String TestCaseClassName = "ScriptTest";
 
 	//保存截图文件的路径
-	public String picPath = "./Script/pic";
+	public String picName = "pic";
 
 	boolean is_drag = false;
 
@@ -111,6 +111,10 @@ public class TestGenerator {
 		}
 		ans += "import com.robotium.solo.Solo;\n";
 		ans += "import android.annotation.SuppressLint;\n";
+		ans += "import android.graphics.Bitmap;\n";
+		ans += "import android.graphics.BitmapFactory;\n";
+		ans += "import android.os.Environment;\n";
+		ans += "import java.io.*;\n";
 		ans += "import android.test.ActivityInstrumentationTestCase2;\n\n";
 
 		ans += testCasePre + TestCaseClassName + testCaseExtend + "<"
@@ -155,9 +159,13 @@ public class TestGenerator {
 			System.out.println("-----------------"+actionNode.getType());
 			if (indexAndType[1].equals("IMAGE")) {
 				ans += "// Assert-Image\n";
-				ans += "solo.takeScreenshot(\"" + picPath + "\");\n";
-				ans += "FileInputStream fis = new FileInputStream(new File(\""
-						+ picPath + ".jpg\"));\n";
+				ans += "solo.takeScreenshot(\"" + picName + "\");\n";
+				ans += "try {\n";
+				ans += "if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){\n";
+				ans += "//获得SD卡对应的存储目录\n";
+				ans += "File sdCardDir = Environment.getExternalStorageDirectory();\n";
+				ans += "//获取指定文件对应的输入流\n";
+				ans += "FileInputStream fis = new FileInputStream(sdCardDir.getCanonicalPath()" + picName+");\n";
 				ans += "Bitmap bitmap = BitmapFactory.decodeStream(fis);\n";
 				String position = actionNode.getPosition();
 				String x = position.split("\\|")[0];
