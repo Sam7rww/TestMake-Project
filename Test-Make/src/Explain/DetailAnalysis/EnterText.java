@@ -14,6 +14,7 @@ public class EnterText {
 		String type = null;
 		String ComName = null;
 		String EnterText = null;
+		String message = null;
 		for(int i=0;i<childNodes.getLength();i++){
 			if (childNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
 //				System.out.println("当前结点为"+childNodes.item(i).getNodeName());
@@ -23,11 +24,15 @@ public class EnterText {
 						String NowName = textList.item(j).getNodeName();
 //						System.out.println("当前结点为"+NowName);
 						if (NowName.equalsIgnoreCase("index")) {
-							ComName = textList.item(j).getTextContent();
+							ResolveMessage resolveMessage = new ResolveMessage();
+							ComName = resolveMessage.ResolveMsg(message, "index");
+//							ComName = textList.item(j).getTextContent();
 						}else if (NowName.equalsIgnoreCase("componentType")) {
 							type = textList.item(j).getTextContent();
 						}else if (NowName.equalsIgnoreCase("input")) {
 							EnterText = textList.item(j).getTextContent();
+						}else if (NowName.equalsIgnoreCase("message")) {
+							message = textList.item(j).getTextContent();
 						}
 					}
 				}

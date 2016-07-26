@@ -50,7 +50,7 @@ public class XmlAnalyse {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// 通过document的parse方法加载bookstore.xml文件到当前项目下
 			Document document = db
-					.parse("/Users/chl/GitProject/Excellent-Engineering/Modle/ONE_PIECE/musicNote/paths.xml");
+					.parse("/Users/sam/TestMake-Project/Test-Make/AllXml/paths(7).xml");
 			// 获取所有path节点的集合
 			NodeList pathlist = document.getElementsByTagName("path");
 			// 通过NodeList的getLength方法可以获取bookList的长度
