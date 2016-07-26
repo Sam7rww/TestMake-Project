@@ -7,10 +7,10 @@ import Node.ActionNode;
 
 public class BusinessLogic {
 	
-	public List<ActionNode> GetAllAction(){
+	public void GetAllAction(String PackageWay,String MainActivity,String XmlWay){
 		String name = "Test";
 		XmlAnalyse analyseAction = new XmlAnalyse();
-		List<ActionNode> actionList = analyseAction.GetAction();
+		List<ActionNode> actionList = analyseAction.GetAction(XmlWay+"path.xml");
 		System.out.println("asasfa"+actionList.get(0).getAction());
 		for(int i=0;i<actionList.size();i++){
 			ActionNode anActionNode = actionList.get(i);
@@ -37,11 +37,11 @@ public class BusinessLogic {
 		}
 		
 		
-		return analyseAction.GetAction();
+//		return analyseAction.GetAction();
 	}
 	
 	public static void main(String[] args) {
 		BusinessLogic businessLogic = new BusinessLogic();
-		businessLogic.GetAllAction();
+		businessLogic.GetAllAction(null,null,null);
 	}
 }
