@@ -71,8 +71,11 @@ public class TestGenerator {
 						+ pos[1] + ");\n\n";
 			} else {
 				if (actionNode.getType().equals("ImageButton")) {
-					ans += "solo.clickLongOn" + actionNode.getType() + "("
+					ans += "solo.clickOn" + actionNode.getType() + "("
 							+ actionNode.getComponentid() + ");\n\n";
+				} else if (actionNode.getType().equals("Button")) {
+					ans += "solo.clickOn" + actionNode.getType() + "(\""
+							+ actionNode.getComponentid() + "\");\n\n";
 				} else {
 					ans += "solo.clickLongOn" + actionNode.getType() + "(\""
 							+ actionNode.getComponentid() + "\");\n\n";
