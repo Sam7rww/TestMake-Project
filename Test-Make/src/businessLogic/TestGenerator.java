@@ -108,7 +108,6 @@ public class TestGenerator {
 					+ MainActivityName + ";\n";
 		}
 		ans += "import com.robotium.solo.Solo;\n";
-		ans += "import " + testApplicationPackageName + "." + MainActivityName + ";\n";
 		ans += "import android.annotation.SuppressLint;\n";
 		ans += "import android.graphics.Bitmap;\n";
 		ans += "import android.graphics.BitmapFactory;\n";
@@ -122,7 +121,7 @@ public class TestGenerator {
 		ans += soloCreator + ";\n\n";
 
 		ans += "@SuppressLint(\"NewApi\")\n";
-		ans += "public " + TestCaseClassName + "()";
+		ans += "public  " + TestCaseClassName + "()";
 		ans += "{\n";
 		ans += "super(" + MainActivityName + ".class)" + ";\n";
 		ans += "}\n\n";

@@ -22,7 +22,7 @@ public class TestScript {
 		a6.setNext(a7);
 		a7.setNext(a8);
 		
-		String result = new TestGenerator().generatorCompleteTest("net.fercanet.LNM","TestCaseClassName","MainMenu");
+		String result = new TestGenerator().generatorCompleteTest("net.fercanet.LNM","fileName","MainMenu");
 //		new TestAssist().generator(a2, result,"");
 		new TestAssist().generator(a2, result, "./Script/","fileName");
 //		System.out.println("heheda");
