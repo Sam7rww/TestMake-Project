@@ -91,6 +91,7 @@ public class TestGenerator {
 			break;
 		case TEXT:
 			ans += "// EnterText-TestAction-In-TestState\n";
+			ans += "solo.clearEditText(" + actionNode.getComponentid() + ");\n";
 			ans += "solo.enterText(" + actionNode.getComponentid() + ",\""
 					+ actionNode.getPosition() + "\");\n\n";
 			break;
