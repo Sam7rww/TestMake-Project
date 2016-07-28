@@ -66,10 +66,15 @@ public class TestAssist {
 			res += testGenerator.testOracleSequence(actionNode);
 			res += "}\n";
 			scriptNum++;
+			System.out.println("scriptNum = "+scriptNum);
 			int addScriptNum = res
 					.indexOf(" extends ActivityInstrumentationTestCase2");
 			String res1 = res.substring(0, addScriptNum);
 			String res2 = res.substring(addScriptNum);
+			res = res1 + scriptNum + res2;
+			addScriptNum = res.indexOf("public  ");
+			res1 = res.substring(0,addScriptNum+8);
+			res2 = res.substring(addScriptNum+8);
 			res = res1 + scriptNum + res2;
 			StoreTestCase(res, storePath + fileName + scriptNum);
 		}
