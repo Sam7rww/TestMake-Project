@@ -15,10 +15,10 @@ public class TestGenerator {
 	public static String setupFunction = "public void setUp() throws Exception { \n solo = new Solo(getInstrumentation(), getActivity()); \n }\n\n";
 	public static String teardownFunction = "public void tearDown() throws Exception { \n solo.finishOpenedActivities(); \n }\n\n";
 
-//	public String testApplicationName; // = "SimpleGUI"
-//	public String testApplicationPackageName = "";
+	// public String testApplicationName; // = "SimpleGUI"
+	// public String testApplicationPackageName = "";
 
-	//保存截图文件的路径
+	// 保存截图文件的路径
 	public String picName = "pic";
 
 	boolean is_drag = false;
@@ -49,8 +49,13 @@ public class TestGenerator {
 						+ pos[1] + ");\n\n";
 			} else {
 				// 根据组件id和类型对组件进行操作
-				ans += "solo.clickOn" + actionNode.getType() + "(\""
-						+ actionNode.getComponentid() + "\");\n\n";
+				if (actionNode.getType() == "ImageButton") {
+					ans += "solo.clickOn" + actionNode.getType() + "("
+							+ actionNode.getComponentid() + ");\n\n";
+				} else {
+					ans += "solo.clickOn" + actionNode.getType() + "(\""
+							+ actionNode.getComponentid() + "\");\n\n";
+				}
 			}
 			break;
 		case DCLICK:
@@ -86,7 +91,8 @@ public class TestGenerator {
 			break;
 		case TEXT:
 			ans += "// EnterText-TestAction-In-TestState\n";
-			ans += "solo.enterText("+actionNode.getComponentid()+",\""+actionNode.getPosition()+"\");\n\n";
+			ans += "solo.enterText(" + actionNode.getComponentid() + ",\""
+					+ actionNode.getPosition() + "\");\n\n";
 			break;
 		default:
 
@@ -99,7 +105,8 @@ public class TestGenerator {
 	/**
 	 * @return TODO 生成导包等辅助语句
 	 */
-	public String generatorCompleteTest(String testApplicationPackageName,String TestCaseClassName,String MainActivityName) {
+	public String generatorCompleteTest(String testApplicationPackageName,
+			String TestCaseClassName, String MainActivityName) {
 		String ans = "";
 
 		if (!testApplicationPackageName.equals("")) {
@@ -154,7 +161,7 @@ public class TestGenerator {
 		while (actionNode != null) {
 
 			String indexAndType[] = actionNode.getType().split("\\|");
-			System.out.println("-----------------"+actionNode.getType());
+			System.out.println("-----------------" + actionNode.getType());
 			if (indexAndType[1].equals("IMAGE")) {
 				ans += "// Assert-Image\n";
 				ans += "solo.takeScreenshot(\"" + picName + "\");\n";
@@ -163,16 +170,17 @@ public class TestGenerator {
 				ans += "//获得SD卡对应的存储目录\n";
 				ans += "File sdCardDir = Environment.getExternalStorageDirectory();\n";
 				ans += "//获取指定文件对应的输入流\n";
-				ans += "FileInputStream fis = new FileInputStream(sdCardDir.getCanonicalPath()+" +"/Robotium-ScreenShots/\""+ picName+"\");\n";
+				ans += "FileInputStream fis = new FileInputStream(sdCardDir.getCanonicalPath()+"
+						+ "/Robotium-ScreenShots/\"" + picName + "\");\n";
 				ans += "}\n} catch (Exception e) {\ne.printStackTrace();\n}\n";
 				ans += "Bitmap bitmap = BitmapFactory.decodeStream(fis);\n";
 				String position = actionNode.getPosition();
 				String x = position.split("\\|")[0];
 				String y = position.split("\\|")[1];
-				if(x.contains(".")){
+				if (x.contains(".")) {
 					x = x.split(".")[0];
 				}
-				if(y.contains(".")){
+				if (y.contains(".")) {
 					y = y.split(".")[0];
 				}
 				ans += "int color = bitmap.getPixel(" + x + "," + y + ");\n";
