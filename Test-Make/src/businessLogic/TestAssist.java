@@ -72,9 +72,9 @@ public class TestAssist {
 			String res1 = res.substring(0, addScriptNum);
 			String res2 = res.substring(addScriptNum);
 			res = res1 + scriptNum + res2;
-			addScriptNum = res.indexOf("public  ");
-			res1 = res.substring(0,addScriptNum+8);
-			res2 = res.substring(addScriptNum+8);
+			addScriptNum = res.indexOf("(){\nsuper");
+			res1 = res.substring(0,addScriptNum);
+			res2 = res.substring(addScriptNum);
 			res = res1 + scriptNum + res2;
 			StoreTestCase(res, storePath + fileName + scriptNum);
 		}

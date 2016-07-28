@@ -49,7 +49,7 @@ public class TestGenerator {
 						+ pos[1] + ");\n\n";
 			} else {
 				// 根据组件id和类型对组件进行操作
-				if (actionNode.getType() == "ImageButton") {
+				if (actionNode.getType().equals("ImageButton")) {
 					ans += "solo.clickOn" + actionNode.getType() + "("
 							+ actionNode.getComponentid() + ");\n\n";
 				} else {
@@ -70,8 +70,13 @@ public class TestGenerator {
 				ans += "solo.clickLongOnScreen((float)" + pos[0] + ", (float)"
 						+ pos[1] + ");\n\n";
 			} else {
-				ans += "solo.clickLongOn" + actionNode.getType() + "(\""
-						+ actionNode.getComponentid() + "\");\n\n";
+				if (actionNode.getType().equals("ImageButton")) {
+					ans += "solo.clickLongOn" + actionNode.getType() + "("
+							+ actionNode.getComponentid() + ");\n\n";
+				} else {
+					ans += "solo.clickLongOn" + actionNode.getType() + "(\""
+							+ actionNode.getComponentid() + "\");\n\n";
+				}
 			}
 			break;
 		case DRAG:
